@@ -7,6 +7,9 @@
   </head>
   <body>
     <h1>Sell Product</h1>
+    {% if error_message %}
+    <h3>YOU are real durm</h3>
+    {% endif %}
 
 
     <form action="{% url 'website:sell' %}" method="post">
