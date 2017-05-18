@@ -1,8 +1,9 @@
 from django.conf.urls import url
 
-# Remeber to include your view below
+# Remember to include your view below
 # example: from website.views.view_category from *
 from website.views.views import *
+from website.views.view_sell_product_form import sell_product
 
 app_name = "website"
 urlpatterns = [
