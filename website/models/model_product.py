@@ -11,3 +11,4 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.IntegerField()
     quantity = models.IntegerField()
+
