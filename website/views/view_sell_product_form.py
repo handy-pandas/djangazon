@@ -10,14 +10,19 @@ def sell_product(request):
 
     elif request.method == 'POST':
         form_data = request.POST
-        
-        error_message = 1
+        error_message = None
 
-        if error_message == 1:
+        if int(form_data['quantity']) < 1:
+            error_message = 'Please enter a positive number into quantity.'
+
+        if float(form_data['price']) < 0.01:
+            error_message = 'Please enter a positve number into price.'
+
+        if error_message is not None:
             product_form = ProductForm()
             template_name = 'product/create.html'
-            return render(request, template_name, {'product_form': product_form, 'error_message': 1})
-
+            return render(request, template_name, { 'product_form': product_form, 'error_message': error_message })
+        
         p = Product(
             seller = request.user,
             title = form_data['title'],
@@ -25,6 +30,7 @@ def sell_product(request):
             price = form_data['price'],
             quantity = form_data['quantity'],
         )
+
         p.save()
         template_name = 'product/success.html'
         return render(request, template_name, {})
