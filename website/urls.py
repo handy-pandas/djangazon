@@ -3,6 +3,7 @@ from django.conf.urls import url
 # Remeber to include your view below
 # example: from website.views.view_category from *
 from website.views.views import *
+from website.views.product_details_view import *
 
 app_name = "website"
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     url(r'^register$', register, name='register'),
     url(r'^sell$', sell_product, name='sell'),
     url(r'^products$', list_products, name='list_products'),
+    url(r'^product-details$', product_details, name='product_details')
 ]

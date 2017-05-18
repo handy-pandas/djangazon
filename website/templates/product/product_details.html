@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bangazon</title>
+</head>
+<body>
+	<!-- Navbar here -->
+	<h1>>>>>Navbar goes here<<<<</h1>
+	<!-- Navbar ends -->
+	{% if user.is_authenticated %}
+	<h1>Product title: {{product.title}}</h1>
+	<h4>Product Description: {{product.description}}</h4>
+	<h4>Product Quantity: {{product.quantity}}</h4>
+	<h4>Product Price: {{product.price}}</h4>
+	<button class="btn btn-success">Add to order</button>
+	{% else %}
+	<h1>Product title: {{product.title}}</h1>
+	<h4>Product Description: {{product.description}}</h4>
+	<h4>Product Quantity: {{product.quantity}}</h4>
+	<h4>Product Price: {{product.price}}</h4>
+	{% endif %}
+</body>
+</html>
