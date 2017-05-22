@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from website.forms.form_product import ProductForm
-from website.models.models import Product
+from website.models.models import Product, Category
 
 def sell_product(request):
     if request.method == 'GET':
@@ -29,7 +29,7 @@ def sell_product(request):
             description = form_data['description'],
             price = form_data['price'],
             quantity = form_data['quantity'],
-            category = form_data['category'],
+            category = Category.objects.get(pk=form_data['category']),
         )
 
         p.save()
