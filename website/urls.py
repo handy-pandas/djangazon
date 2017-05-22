@@ -5,6 +5,7 @@ from django.conf.urls import url
 from website.views.views import *
 from website.views.product_details_view import *
 from website.views.view_sell_product_form import sell_product
+from website.views.views_product_list import list_products
 
 
 app_name = "website"
