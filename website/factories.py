@@ -67,7 +67,7 @@ class PaymentFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Payment
     name = factory.Faker('name')
-    account_number = factory.Faker('phone_number')
+    account_number = factory.Faker('random_int', min=1000000000000000, max=9999999999999999)
     user = factory.Iterator(User.objects.all())
 
 class OrderFactory(factory.django.DjangoModelFactory):
@@ -80,6 +80,8 @@ class OrderFactory(factory.django.DjangoModelFactory):
 
     Author: Adam Myers
     """
+    class Meta:
+        model = Order
     user = factory.Iterator(User.objects.all())
     payment = factory.Iterator(Payment.objects.all())
 
@@ -98,11 +100,13 @@ class ProductFactory(factory.django.DjangoModelFactory):
 
     Author: Adam Myers
     """
+    class Meta:
+        model = Product
     seller = factory.Iterator(User.objects.all())
     title = factory.Faker('word')
     description = factory.Faker('bs')
-    price = factory.Faker('random_int')
-    quantity = factory.Faker('random_int')
+    price = factory.Faker('random_int', min=1, max=100)
+    quantity = factory.Faker('random_int', min=10, max=50)
     category = factory.Iterator(Category.objects.all())
     is_active = 1
 
@@ -116,6 +120,8 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
 
     Author: Adam Myers
     """
+    class Meta:
+        model = ProductOrder
     product = factory.Iterator(Product.objects.all())
     order = factory.Iterator(Order.objects.all())
 
