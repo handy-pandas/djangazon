@@ -31,25 +31,25 @@ class User(models.Model):
 class Payment(models.Model):
     name = models.CharField(max_length=255)
     account_number = models.IntegerField()
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
     )
 
 
 class Order(models.Model):
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
     )
-    payment_id = models.ForeignKey(
+    payment = models.ForeignKey(
         Payment,
         on_delete=models.CASCADE,
     )
 
 
 class Product(models.Model):
-    seller_id = models.ForeignKey(
+    seller = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
     )
@@ -57,7 +57,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.IntegerField()
     quantity = models.IntegerField()
-    category_id = models.ForeignKey(
+    category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
     )
@@ -65,11 +65,11 @@ class Product(models.Model):
 
 
 class ProductOrder(models.Model):
-    product_id = models.ForeignKey(
+    product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
     )
-    order_id = models.ForeignKey(
+    order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE,
     )
