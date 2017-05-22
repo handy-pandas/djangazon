@@ -6,4 +6,4 @@
 
  from website.models.(your file here) import (class or method name here)
 """
-from website.models.model_product import Product
+from website.models.models import *
