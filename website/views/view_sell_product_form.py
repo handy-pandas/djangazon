@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from website.forms.form_product import ProductForm
-from website.models.model_product import Product
+from website.models.models import Product
 
 def sell_product(request):
     if request.method == 'GET':

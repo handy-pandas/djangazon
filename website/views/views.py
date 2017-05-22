@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 
 from website.forms.forms import UserForm
-from website.models.model_product import Product
+from website.models.models import Product
 
 def index(request):
     template_name = 'index.html'
