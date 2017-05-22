@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bangazon</title>
+	{%include "styles.html"%}
+</head>
+<body>
+	<!-- Navbar -->
+	{%include "navbar.html"%}
+	<!-- Main content -->
+	<h1>Product title: {{product.title}}</h1>
+	<h4>Product Description: {{product.description}}</h4>
+	<h4>Product Quantity: {{product.quantity}}</h4>
+	<h4>Product Price: {{product.price}}</h4>
+	{% if user.is_authenticated %}
+	<button class="btn btn-success">Add to order</button>
+	<a href="{% url 'website:sell' %}">Add another product</a>
+	{% endif %}
+</body>
+</html>

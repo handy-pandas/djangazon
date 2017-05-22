@@ -44,6 +44,8 @@ class Order(models.Model):
     )
     payment = models.ForeignKey(
         Payment,
+        blank=True, 
+        null=True,
         on_delete=models.CASCADE,
     )
 
