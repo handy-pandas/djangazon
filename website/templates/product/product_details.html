@@ -10,18 +10,12 @@
 	<!-- Navbar -->
 	{%include "navbar.html"%}
 	<!-- Main content -->
-	{% if user.is_authenticated %}
 	<h1>Product title: {{product.title}}</h1>
 	<h4>Product Description: {{product.description}}</h4>
 	<h4>Product Quantity: {{product.quantity}}</h4>
 	<h4>Product Price: {{product.price}}</h4>
+	{% if user.is_authenticated %}
 	<button class="btn btn-success">Add to order</button>
-	<a href="{% url 'website:sell' %}">Add another product</a>
-	{% else %}
-	<h1>Product title: {{product.title}}</h1>
-	<h4>Product Description: {{product.description}}</h4>
-	<h4>Product Quantity: {{product.quantity}}</h4>
-	<h4>Product Price: ${{product.price}}</h4>
 	<a href="{% url 'website:sell' %}">Add another product</a>
 	{% endif %}
 </body>
