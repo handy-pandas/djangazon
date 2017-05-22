@@ -5,6 +5,7 @@ from django.conf.urls import url
 from website.views.views import *
 from website.views.product_details_view import *
 from website.views.view_sell_product_form import sell_product
+from website.views.view_category_products import category_products
 
 
 app_name = "website"
@@ -15,5 +16,6 @@ urlpatterns = [
     url(r'^register$', register, name='register'),
     url(r'^sell$', sell_product, name='sell'),
     url(r'^products$', list_products, name='list_products'),
-    url(r'^product_details$', product_details, name='product_details')
+    url(r'^product_details$', product_details, name='product_details'),
+    url(r'^categories$', category_products, name='categories')
 ]

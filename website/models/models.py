@@ -13,7 +13,9 @@ options = (
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-
+    
+    def get_products(self):
+        return Product.objects.filter(category=self)
 
 class User(models.Model):
     username = models.CharField(max_length=255)

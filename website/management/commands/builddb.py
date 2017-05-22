@@ -27,6 +27,6 @@ class Command(BaseCommand):
         UserFactory.create_batch(size=10)
         PaymentFactory.create_batch(size=10)
         OrderFactory.create_batch(size=10)
-        ProductFactory.create_batch(size=10)
+        ProductFactory.create_batch(size=20)
         ProductOrderFactory.create_batch(size=10)
         
