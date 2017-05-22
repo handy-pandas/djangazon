@@ -11,8 +11,8 @@ def add_payment(request):
 	elif request.method == 'POST':
 		form_data = request.POST
 		payment_form = PaymentForm()
-		template_name = 'addpayment.html'
-		return render(request, template_name, {'payment_form': payment_form})
+		# template_name = 'addpayment.html'
+		# return render(request, template_name, {'payment_form': payment_form})
 		
 		p = Payment(
 			name = form_data['name'],
@@ -22,4 +22,4 @@ def add_payment(request):
 
 		p.save()
 		template_name = 'profile.html'
-		return render(request, template_name, {})
+		return render(request, template_name, {'payment_form': payment_form})
