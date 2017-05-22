@@ -6,6 +6,11 @@ from django.db import models
 # check attributes
 # check pks, fks, and join tables
 
+options = (
+        (0, 'False'),
+        (1, 'True'),
+    )
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
@@ -17,9 +22,9 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     email = models.EmailField(max_length=254)
     last_login = models.DateTimeField(auto_now=True)
-    is_superuser = models.SmallIntegerField()
-    is_active = models.SmallIntegerField()
-    is_staff = models.SmallIntegerField()
+    is_superuser = models.IntegerField(default=0, choices=options)
+    is_active = models.IntegerField(default=0, choices=options)
+    is_staff = models.IntegerField(default=0, choices=options)
     date_joined = models.DateTimeField(auto_now=True)
 
 
@@ -56,7 +61,7 @@ class Product(models.Model):
         Category,
         on_delete=models.CASCADE,
     )
-    is_active = models.SmallIntegerField()
+    is_active = models.IntegerField(default=0, choices=options)
 
 
 class ProductOrder(models.Model):
