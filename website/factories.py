@@ -76,7 +76,7 @@ class OrderFactory(factory.django.DjangoModelFactory):
 
     ----Fields----
     user(Iterator[User]): iterates over user.object.all to pull foreign keys
-    user(Iterator[Payment]): iterates over payment.object.all to pull foreign keys
+    payment(Iterator[Payment]): iterates over payment.object.all to pull foreign keys
 
     Author: Adam Myers
     """
@@ -115,8 +115,8 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
     This class creates data for the product table in the database.
 
     ----Fields----
-    seller(Iterator[User]): iterates over user.objects.all
-    name('word'): fake title of a product
+    product(Iterator[Product]): iterates over product.objects.all
+    order(Iterator[Order]): iterates over order.objects.all
 
     Author: Adam Myers
     """
