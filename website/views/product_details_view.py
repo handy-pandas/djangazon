@@ -8,20 +8,21 @@ from website.forms.form_product import ProductForm
 from website.models.models import Product
 
 
-def product_details(request):
+def product_details(request, product_id):
 	"""This function allows the product's information to be displayed as prescribed.
 
 	Author:
 	    Nick Nash
 	
 	Args:
-	    request (TYPE): A list of tuples from the database
+	    request (List): A list of tuples from the database
 	
 	Returns:
 	    request: A list of tuples from the database
 	    template_name (HTML): The webpage's structure
 	    product (Dict): This is the product's information stored inside of a dictionary
 	"""
-	product = Product.objects.all() 
+	chosen_product = Product.objects.get(pk=product_id)
 	template_name = 'product/product_details.html'
-	return render(request, template_name, {'product': product})
+	return render(request, template_name, {'product': chosen_product})
+
