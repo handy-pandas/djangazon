@@ -14,18 +14,21 @@ options = (
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
 
-class User(models.Model):
-    username = models.CharField(max_length=255)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-    email = models.EmailField(max_length=254)
-    last_login = models.DateTimeField(auto_now=True)
-    is_superuser = models.IntegerField(default=0, choices=options)
-    is_active = models.IntegerField(default=0, choices=options)
-    is_staff = models.IntegerField(default=0, choices=options)
-    date_joined = models.DateTimeField(auto_now=True)
+
+# class User(models.Model):
+#     username = models.CharField(max_length=255)
+#     first_name = models.CharField(max_length=255)
+#     last_name = models.CharField(max_length=255)
+#     password = models.CharField(max_length=255)
+#     email = models.EmailField(max_length=254)
+#     last_login = models.DateTimeField(auto_now=True)
+#     is_superuser = models.IntegerField(default=0, choices=options)
+#     is_active = models.IntegerField(default=0, choices=options)
+#     is_staff = models.IntegerField(default=0, choices=options)
+#     date_joined = models.DateTimeField(auto_now=True)
 
 
 class Payment(models.Model):
@@ -44,7 +47,7 @@ class Order(models.Model):
     )
     payment = models.ForeignKey(
         Payment,
-        blank=True, 
+        blank=True,
         null=True,
         on_delete=models.CASCADE,
     )

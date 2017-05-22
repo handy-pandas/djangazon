@@ -22,13 +22,14 @@ def sell_product(request):
             product_form = ProductForm()
             template_name = 'product/create.html'
             return render(request, template_name, { 'product_form': product_form, 'error_message': error_message })
-        
+
         p = Product(
             seller = request.user,
             title = form_data['title'],
             description = form_data['description'],
             price = form_data['price'],
             quantity = form_data['quantity'],
+            category = form_data['category'],
         )
 
         p.save()
