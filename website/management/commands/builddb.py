@@ -29,4 +29,4 @@ class Command(BaseCommand):
         OrderFactory.create_batch(size=10)
         ProductFactory.create_batch(size=50)
         ProductOrderFactory.create_batch(size=10)
-        
+
