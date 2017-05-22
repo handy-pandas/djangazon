@@ -9,5 +9,6 @@ class Product(models.Model):
     )
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    price = models.IntegerField()
-    quantity = models.IntegerField()
+    price = models.FloatField()
+    quantity = models.PositiveIntegerField()
+
