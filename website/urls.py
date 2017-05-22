@@ -16,5 +16,7 @@ urlpatterns = [
     url(r'^sell$', sell_product, name='sell'),
     url(r'^products$', list_products, name='list_products'),
     url(r'^product_details/(?P<product_id>.+?)/$', product_details, name='product_details'),
-    url(r'^order/([0-9]+)/$', order, name='order')
+    url(r'^order/([0-9]+)/$', order, name='order'),
+    url(r'^payment$', payment, name='payment'),
+    url(r'^confirmation$', confirmation, name='confirmation')
 ]

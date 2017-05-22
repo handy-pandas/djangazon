@@ -11,15 +11,9 @@
 		{%include "navbar.html"%}
 		<!-- Main content -->
 
-		<h4>Change your payment type?</h4>
+		<h1>Success</h1>
+		<h2>You did it!!</h2>
 
-		<select>
-			<option>{{payment.name}}</option>
-			{% if form.mycheckbox.value %}
-		</select>   
-
-		{% if user.is_authenticated %}
-		<button class="btn btn-success">Done</button>
-		{% endif %}
+		<button class="btn btn-success">Home</button>
 	</body>
 </html>
