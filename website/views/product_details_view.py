@@ -4,8 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
 
-from website.forms.forms import UserForm, ProductForm
-from website.models.models import Product
+from website.forms.forms import UserForm
+from website.forms.form_product import ProductForm
+from website.models.model_product import Product
 
 
 def product_details(request):

@@ -4,15 +4,24 @@
   <head>
     <meta charset="utf-8">
     <title>Bangazon</title>
+    {%include "styles.html"%}
   </head>
   <body>
+
+    {%include "navbar.html"%}
     <h1>Sell Product</h1>
 
+    {% if error_message %}
+    <div class="alert alert-danger alert-dismissable">
+      <i class="fa fa-coffee"></i>
+      {{ error_message }}
+    </div>
+    {% endif %}
 
     <form action="{% url 'website:sell' %}" method="post">
       {% csrf_token %}
       {{ product_form.as_p }}
-      <input type="submit" value="Sell It" />
+      <input type="submit" value="Sell It"/>
     </form>
   </body>
 </html>

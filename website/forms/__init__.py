@@ -6,4 +6,5 @@
 
  from website.forms.(your file here) import (class or method name here)
 """
-from website.forms.forms import UserForm, ProductForm
+from website.forms.forms import UserForm
+from website.forms.form_product import ProductForm
