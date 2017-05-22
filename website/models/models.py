@@ -15,6 +15,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
 
 
+
 # class User(models.Model):
 #     username = models.CharField(max_length=255)
 #     first_name = models.CharField(max_length=255)
@@ -26,6 +27,10 @@ class Category(models.Model):
     # is_active = models.IntegerField(default=0, choices=options)
     # is_staff = models.IntegerField(default=0, choices=options)
     # date_joined = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
 
 
 class Payment(models.Model):
@@ -44,7 +49,7 @@ class Order(models.Model):
     )
     payment = models.ForeignKey(
         Payment,
-        blank=True, 
+        blank=True,
         null=True,
         on_delete=models.CASCADE,
     )
