@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bangazon</title>
+    {%include "styles.html"%}
+  </head>
+  <body>
+    {%include "navbar.html"%}
+    <h1>Products By Category</h1>
+
+    {% for category in categories %}
+      <p>{{ category.name }}  ({{ category.products.count }})</p>
+      <ol>
+      {% for product in category.get_products %}
+        <li id="{{product.id}}"><a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
+
+      {% endfor %}
+
+      </ol>
+    {% endfor %}
+  </body>
+</html>
