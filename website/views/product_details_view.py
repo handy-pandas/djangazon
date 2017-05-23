@@ -25,7 +25,3 @@ def product_details(request, product_id):
 	chosen_product = Product.objects.get(pk=product_id)
 	template_name = 'product/product_details.html'
 	return render(request, template_name, {'product': chosen_product})
-
-# def chosen_product_category(request):
-# 	chosen_category 
-# category = Category.objects.get(pk=form_data['category']),
