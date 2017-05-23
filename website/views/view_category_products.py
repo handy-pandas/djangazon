@@ -4,10 +4,10 @@ from website.models.models import Category
 
 def category_products(request):
     """This function allows the product's information to be displayed as prescribed.
-    
+
     Arguments:
         request (List): A list of tuples from the database pertaining to categories
-    
+
     Returns:
         request: A list of tuples from the database
         template_name (HTML): The webpage's structure
