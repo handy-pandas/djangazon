@@ -5,6 +5,7 @@ from django.conf.urls import url
 from website.views.views import *
 from website.views.product_details_view import *
 from website.views.view_sell_product_form import sell_product
+from website.views.add_payment_to_profile import add_payment
 
 
 app_name = "website"
@@ -18,5 +19,7 @@ urlpatterns = [
     url(r'^product_details/(?P<product_id>.+?)/$', product_details, name='product_details'),
     url(r'^order/([0-9]+)/$', order, name='order'),
     url(r'^payment$', payment, name='payment'),
-    url(r'^confirmation$', confirmation, name='confirmation')
+    url(r'^confirmation$', confirmation, name='confirmation'),
+    url(r'^profile$', profile, name='profile'),
+    url(r'^add_payment$', add_payment, name='add_payment')
 ]
