@@ -14,7 +14,7 @@
       <p><a href="{% url 'website:category_products' category.id %}">{{ category.name }}</a>  ({{ category.products.count }})</p>
       <ol>
       {% for product in category.get_products %}
-        <li id="{{product.id}}"><a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
+        <li><a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
 
       {% endfor %}
 

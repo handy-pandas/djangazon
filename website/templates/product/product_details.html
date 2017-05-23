@@ -12,7 +12,7 @@
 	<div class="container">
 		<!-- Breadcrumbs -->
 		<ol class="breadcrumb">
-			<li><a href="{% url 'website:categories' %}">{{product.category}}</a></li>
+			<li><a href="{% url 'website:category_products' product.category.id %}">{{product.category}}</a></li>
 			<li class="active">{{product.title}}</li>
 		</ol>
 		<!-- Main content -->
@@ -30,4 +30,4 @@
 		</div>
 	</div>
 </body>
-</html> 
+</html>
