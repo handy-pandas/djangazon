@@ -32,3 +32,61 @@ Using the requirements above create a [model](https://docs.djangoproject.com/en/
 ### Form Helpers
 
 Django, like Angular, has many built-in [helper tags and filters](https://docs.djangoproject.com/en/1.10/ref/templates/builtins/) when building the site templates. We strongly recommend reading this documentation while building your templates.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+Install [pip](https://packaging.python.org/installing/)
+
+Install [Python 3.6](https://www.python.org/downloads/)
+
+Install Django and REST framework:
+```
+pip install django
+pip install djangorestframework
+```
+
+### Installing
+Clone repo:
+
+```
+git clone https://github.com/handy-pandas/djangazon.git
+cd djangazon
+```
+Setting up the database:
+```
+python manage.py builddb 
+```
+Run project in browser:
+
+```
+python manage.py runserver
+```
+In your browser you should see somthing like this:
+![home screen](images/djangazon-home.jpg?raw=true)
+
+## Running the tests
+TBD
+
+## Deployment
+No additional resources required.
+## Built With
+
+* [Python](http://www.dropwizard.io/1.0.2/docs/) - Main Language
+* [Django](http://www.dropwizard.io/1.0.2/docs/) - The framework used
+* [pip](https://maven.apache.org/) - Dependency Management
+
+
+## Authors
+
+* **Adam Myers** - [ANMyers](https://github.com/ANMyers)
+* **Angela Lee** - [leead4](https://github.com/leead4)
+* **Nick Nash** - [thenicknash](https://github.com/thenicknash)
+* **Talbot Lawrence** - [talbotlawrence](https://github.com/talbotlawrence)
+* **William Caldwell** - [wocaldwell](https://github.com/wocaldwell)
+
+
+## Acknowledgments
+"Thank you all and GOOD NIGHT!" - Every Musician Ever
