@@ -11,7 +11,7 @@
     <h1>Products By Category</h1>
 
     {% for category in categories %}
-      <p>{{ category.name }}  ({{ category.get_product_count }})</p>
+      <p>{{ category.name }}  ({{ category.products.count }})</p>
       <ol>
       {% for product in category.get_products %}
         <li id="{{product.id}}"><a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>

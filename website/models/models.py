@@ -17,9 +17,6 @@ class Category(models.Model):
     def get_products(self):
         return Product.objects.filter(category=self)[:3]
 
-    def get_product_count(self):
-        return Product.objects.filter(category=self).count()
-
 # class User(models.Model):
 #     username = models.CharField(max_length=255)
 #     first_name = models.CharField(max_length=255)
@@ -69,6 +66,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
+        related_name='products'
     )
     is_active = models.IntegerField(default=0, choices=options)
 
