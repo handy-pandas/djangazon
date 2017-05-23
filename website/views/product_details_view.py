@@ -13,10 +13,10 @@ def product_details(request, product_id):
 
 	Author:
 	    Nick Nash
-	
+
 	Args:
 	    request (List): A list of tuples from the database
-	
+
 	Returns:
 	    request: A list of tuples from the database
 	    template_name (HTML): The webpage's structure
