@@ -7,22 +7,18 @@
         {%include "styles.html"%}
     </head>
     <body>
-        <!-- Navbar -->
         {%include "navbar.html"%}
-        <!-- Main content -->
 
-        <!-- {% if order_id %} -->
+        <h2>Order Preview</h2>
         <ul>
-            {% for product in .choice_set.all %}    <!-- Check for correct info-->
-            <li>{{product.price}}</li>
-            <li>{{product.title}}</li>
-            <li>{{product.quantity}}</li>
-        </ul>        
-        {% endfor %}
-
-
-        {% if user.is_authenticated %}
-        <button class="btn btn-success">Complete order</button>     <!-- Check button-->
-        {% endif %}
+            {% for o in orders %}
+            {% for product in o.products.all %}
+            <li>Product Name: {{product.title}} 
+            <p>Price: {{product.price}}</p></li>
+            {% endfor %}
+            {% endfor %}
+        </ul>
+        <p><strong>Order Total: ${{ total }} </strong></p>
+        <button class="btn btn-success">Complete order</button>
     </body>
 </html>

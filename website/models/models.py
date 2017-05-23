@@ -14,20 +14,6 @@ options = (
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
-
-
-# class User(models.Model):
-#     username = models.CharField(max_length=255)
-#     first_name = models.CharField(max_length=255)
-    # last_name = models.CharField(max_length=255)
-    # password = models.CharField(max_length=255)
-    # email = models.EmailField(max_length=254)
-    # last_login = models.DateTimeField(auto_now=True)
-    # is_superuser = models.IntegerField(default=0, choices=options)
-    # is_active = models.IntegerField(default=0, choices=options)
-    # is_staff = models.IntegerField(default=0, choices=options)
-    # date_joined = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return self.name
 
@@ -53,7 +39,10 @@ class Order(models.Model):
         null=True,
         on_delete=models.CASCADE,
     )
+    products = models.ManyToManyField('Product', through='ProductOrder')
 
+    def get_products(self):
+        return ProductOrder.objects.filter(order_id=self)
 
 class Product(models.Model):
     seller = models.ForeignKey(
