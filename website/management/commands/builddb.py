@@ -23,9 +23,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         management.call_command('makemigrations')
         management.call_command('migrate')
-        # CategoryFactory.create_batch(size=10)
-        # PaymentFactory.create_batch(size=10)
-        # OrderFactory.create_batch(size=10)
-        # ProductFactory.create_batch(size=50)
-        # ProductOrderFactory.create_batch(size=10)
+        CategoryFactory.create_batch(size=10)
+        PaymentFactory.create_batch(size=10)
+        OrderFactory.create_batch(size=10)
+        ProductFactory.create_batch(size=50)
+        ProductOrderFactory.create_batch(size=10)
 
