@@ -13,9 +13,13 @@ options = (
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
     
     def get_products(self):
         return Product.objects.filter(category=self)[:3]
+
 
 class Payment(models.Model):
     name = models.CharField(max_length=255)
