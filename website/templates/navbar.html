@@ -25,23 +25,22 @@
         <li class="">
             <a href="/sell">Sell Products</a>
         </li>
-        {%endif%}
         <li class="">
-            {% if user.is_authenticated %}
             <a href="/profile">
-            {%else%}
-            <a href="/login">
-            {%endif%}
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             </a>
-
         </li>
+        <li class="">
+            <a href="{% url 'website:logout' %}">Logout</a>
+        </li>
+        {%else%}
         <li class="">
             <a href="/login">Login</a>
         </li>
         <li class="">
             <a href="/register">Register</a>
         </li>
+        {%endif%}
     </ul>
   </div>
 </nav>

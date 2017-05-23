@@ -7,9 +7,11 @@ from django.template import RequestContext
 from website.forms.forms import UserForm
 from website.models.models import Product
 
+
 def index(request):
     template_name = 'index.html'
-    return render(request, template_name, {})
+    all_products = Product.objects.all().order_by('-id')[:20]
+    return render(request, template_name, {'products': all_products})
 
 
 # Create your views here.
@@ -90,13 +92,22 @@ def user_logout(request):
     # in the URL in redirects?????
     return HttpResponseRedirect('/')
 
-
-
-
 def list_products(request):
     all_products = Product.objects.all()
     template_name = 'product/list.html'
     return render(request, template_name, {'products': all_products})
+
+
+def profile(request):
+    template_name = 'profile.html'
+    return render(request, template_name, {})
+
+def add_payment(request):
+    template_name = 'addpayment.html'
+    return render(request, template_name, {})
+
+
+
 
 
 

@@ -16,8 +16,6 @@ class Command(BaseCommand):
     1. python manage.py makemigrations api
     2. python manage.py migrate
     3. (Factory Calls): Category, User, Payment, Product, ProductOrder
-
-
     Author: Talbot Lawrence, Adam Myers
     """
 
