@@ -9,16 +9,25 @@
 <body>
 	<!-- Navbar -->
 	{%include "navbar.html"%}
-	<!-- Main content -->
-	<h1>Product title: {{product.title}}</h1>
-	<h4>Product Description: {{product.description}}</h4>
-	<h4>Product Quantity: {{product.quantity}}</h4>
-	<h4>Product Price: {{product.price}}</h4>
-	<a href="{% url 'website:index' %}">Back to products</a>
-	{% if user.is_authenticated %}
-	<a href="{% url 'website:sell' %}">Add another product</a>
-	<br>
-	<button class="btn btn-success">Add to order</button>
-	{% endif %}
+	<div class="container">
+		<!-- Breadcrumbs -->
+		<ol class="breadcrumb">
+			<li><a href="#">{{product.category}}</a></li>
+			<li class="active">{{product.title}}</li>
+		</ol>
+		<!-- Main content -->
+		<div class="main-content text-center">
+			<h1>Product title: {{product.title}}</h1>
+			<h4>Product Description: {{product.description}}</h4>
+			<h4>Product Quantity: {{product.quantity}}</h4>
+			<h4>Product Price: ${{product.price}}</h4>
+			<a href="{% url 'website:index' %}">Back to products</a>
+			{% if user.is_authenticated %}
+			<a href="{% url 'website:sell' %}">Add another product</a>
+			<br>
+			<button class="btn btn-success">Add to order</button>
+			{% endif %}
+		</div>
+	</div>
 </body>
 </html>
