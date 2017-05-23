@@ -98,6 +98,18 @@ def list_products(request):
     return render(request, template_name, {'products': all_products})
 
 
+def profile(request):
+    template_name = 'profile.html'
+    return render(request, template_name, {})
+
+def add_payment(request):
+    template_name = 'addpayment.html'
+    return render(request, template_name, {})
+
+
+
+
+
 
 
 
