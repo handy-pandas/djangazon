@@ -20,6 +20,24 @@ class CategoryViewTests(TestCase):
 		['<Product: Test>', '<Product: Test1>']
 		)
 
+class ProductArttributeTests(TestCase):
+	def test_if_product_detail_view_has_title_description_price_quantity(self):
+		seller = User.objects.create(username="test_user")
+		category = Category.objects.create(name="test_category")
+		product = Product.objects.create(seller=seller, title="Test", description="Please work buddy!", price="7", quantity="1", category=category)
+		response = self.client.get(reverse('website:product_details', args=[product.id]))
+		self.assertContains(
+		response, product.title
+		)
+		self.assertContains(
+		response, product.description
+		)
+		self.assertContains(
+		response, product.price
+		)
+		self.assertContains(
+		response, product.quantity
+		)
 
 
 # live server TestCase
