@@ -19,6 +19,6 @@
             {% endfor %}
         </ol>
         <p><strong>Order Total: ${{ total }} </strong></p>
-        <a class="btn btn-success" href="{% url 'website:product_details' product.id %}">Complete order</a>
+        <a class="btn btn-success" href="{% url 'website:payment' %}">Complete order</a>
     </body>
 </html>

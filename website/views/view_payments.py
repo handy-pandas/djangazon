@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from website.models.models import Order, Product
+from website.models.models import Order, Product, Payment
 
 def view_payments(request):
     """This function allows the after the confirmation of an order to choose a payment type.
