@@ -11,16 +11,17 @@
 
         <h4>Choose your payment type.</h4>
 
-        <select>
+        <form action="{% url 'website:payment' %}" method="post">
+            <select>
 
-            {% for payment in payments %}
+                {% for payment in payments %}
 
-            <option>{{payment.name}}</option>
-            
-            {% endfor %}
+                <option value='{{payment.id}}'>{{payment.name}}</option>
+                
+                {% endfor %}
 
-        </select>
+            </select>
+        </form>
 
-        <button class="btn btn-success">Done</button>
     </body>
 </html>

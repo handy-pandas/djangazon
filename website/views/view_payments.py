@@ -16,10 +16,14 @@ def view_payments(request):
         Talbot Lawrence
         Adam Myers
     """
+    if request.method == 'GET':
+        payments = Payment.objects.filter(user__id=1)
 
-    payments = Payment.objects.filter(user__id=1)
+        context = { 'payments': payments }
 
-    context = { 'payments': payments }
-
-    template_name = 'choose_payment.html'
-    return render(request, template_name, context)
+        template_name = 'choose_payment.html'
+        return render(request, template_name, context)
+    elif request.method == 'POST':
+        
+        template_name = 'confirmation.html'
+        return render(request, template_name, context)
