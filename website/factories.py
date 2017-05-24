@@ -18,7 +18,7 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Category
-    name = factory.Faker('word')
+    name = factory.Faker('bs')
 
 class UserFactory(factory.django.DjangoModelFactory):
     """
@@ -84,6 +84,20 @@ class OrderFactory(factory.django.DjangoModelFactory):
         model = Order
     user = factory.Iterator(User.objects.all())
     payment = factory.Iterator(Payment.objects.all())
+
+class InCompleteOrderFactory(factory.django.DjangoModelFactory):
+    """
+    This class creates data for the order table in the database.
+
+    ----Fields----
+    user(Iterator[User]): iterates over user.object.all to pull foreign keys
+    payment(Iterator[Payment]): iterates over payment.object.all to pull foreign keys
+
+    Author: Adam Myers
+    """
+    class Meta:
+        model = Order
+    user = factory.Iterator(User.objects.all())
 
 class ProductFactory(factory.django.DjangoModelFactory):
     """

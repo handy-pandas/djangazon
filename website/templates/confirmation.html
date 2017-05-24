@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Bangazon</title>
+        {%include "styles.html"%}
+    </head>
+    <body>
+        {%include "navbar.html"%}
+
+        <h1>Success!</h1>
+        <h2>You have Completed your order.</h2>
+
+        <a href="{% url 'website:index' %}" class="btn btn-success">Home</a>
+    </body>
+</html>

@@ -41,7 +41,10 @@ class Order(models.Model):
         null=True,
         on_delete=models.CASCADE,
     )
+    products = models.ManyToManyField('Product', through='ProductOrder')
 
+    def get_products(self):
+        return ProductOrder.objects.filter(order_id=self)
 
 class Product(models.Model):
     seller = models.ForeignKey(
