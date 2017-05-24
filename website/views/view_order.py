@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from website.models.models import Order, Product
 
-def view_order(request):
+def view_order(request, order_id=None):
     """This function allows the order's information to be displayed as prescribed.
     
     Arguments:
@@ -18,17 +18,20 @@ def view_order(request):
     """
     # request.user.id
     # order = Order.objects.filter(user=request.user, payment=None)
-    total = 0
-    order_id = None
+    if order_id = None:
+        total = 0
+        
 
-    orders = Order.objects.filter(user__id=1, payment=None)
-    for o in orders:
-        order_id = o.id
-        for product in o.products.all():
-            total = total + product.price
+        orders = Order.objects.filter(user__id=1, payment=None)
+        for o in orders:
+            order_id = o.id
+            for product in o.products.all():
+                total = total + product.price
 
-    print(total)
-    context = { 'orders': orders, 'total': total, 'order_id': order_id }
+        print(total)
+        context = { 'orders': orders, 'total': total, 'order_id': order_id }
 
-    template_name = 'order.html'
-    return render(request, template_name, context)
+        template_name = 'order.html'
+        return render(request, template_name, context)
+
+    else:
