@@ -12,15 +12,16 @@
         <h4>Choose your payment type.</h4>
 
         <form action="{% url 'website:payment' %}" method="post">
-            <select>
-
+        {% csrf_token %}
+            <select name="payment_id" required>
                 {% for payment in payments %}
 
                 <option value='{{payment.id}}'>{{payment.name}}</option>
                 
                 {% endfor %}
-
             </select>
+
+            <input class="btn btn-success" type="submit" value="Done"/>
         </form>
 
     </body>

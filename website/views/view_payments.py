@@ -23,7 +23,13 @@ def view_payments(request):
 
         template_name = 'choose_payment.html'
         return render(request, template_name, context)
+
     elif request.method == 'POST':
-        
+        form_data = request.POST
+
+        print("\n\n{}\n\n".format(form_data['payment_id']))
+
+        context = { 'payment_id': form_data['payment_id'] }
+
         template_name = 'confirmation.html'
         return render(request, template_name, context)
