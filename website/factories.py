@@ -18,7 +18,7 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Category
-    name = factory.Faker('word')
+    name = factory.Faker('bs')
 
 class UserFactory(factory.django.DjangoModelFactory):
     """

@@ -7,11 +7,8 @@ from website.views.product_details_view import *
 from website.views.view_sell_product_form import sell_product
 from website.views.view_category_products import category_products
 from website.views.add_payment_to_profile import add_payment
-<<<<<<< HEAD
 from website.views.view_order import view_order
-=======
 from website.views.view_products import list_category_products
->>>>>>> master
 
 
 app_name = "website"

@@ -10,15 +10,15 @@
         {%include "navbar.html"%}
 
         <h2>Order Preview</h2>
-        <ul>
+        <ol>
             {% for o in orders %}
             {% for product in o.products.all %}
-            <li>Product Name: {{product.title}} 
+            <li>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{product.title}}</a>
             <p>Price: {{product.price}}</p></li>
             {% endfor %}
             {% endfor %}
-        </ul>
+        </ol>
         <p><strong>Order Total: ${{ total }} </strong></p>
-        <button class="btn btn-success">Complete order</button>
+        <a class="btn btn-success" href="{% url 'website:product_details' product.id %}">Complete order</a>
     </body>
 </html>
