@@ -20,8 +20,6 @@ class Command(BaseCommand):
     """
 
     def handle(self, *args, **options):
-        os.system('rm website/migrations/*[0-9].py;')   #deletes all of the .py files in the migrations directory except for the __init__.py file.
-        # os.system('find . -path "/website/migrations/*.pyc"  -delete;')  #deletes all of the .pyc files in the migrations directory.
-        os.system('rm db.sqlite3;')  #deletes the database file.
-        #os.system('python manage.py makemigrations website;')  #creates the migration.
-        #os.system('python manage.py migrate;')  #runs the migration.  This will delete all of the data in your database.
+        os.system('rm website/migrations/*.py;')   #deletes all of the .py files in the migrations directory except for the __init__.py file.
+        os.system('touch website/migrations/__init__.py;') #re-create the __init__.py file.
+        os.system('rm db.sqlite3;')  #deletes the database file.        
