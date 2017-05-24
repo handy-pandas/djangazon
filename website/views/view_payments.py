@@ -16,18 +16,20 @@ def view_payments(request):
         Talbot Lawrence
         Adam Myers
     """
-    if request.method == 'GET':
+    form_data = request.POST
+    
+    if form_data['payment_id'] == 'Needed':
         payments = Payment.objects.filter(user__id=1)
 
-        context = { 'payments': payments }
+        context = { 'payments': payments, 'order_id': form_data['order_id'] }
 
         template_name = 'choose_payment.html'
         return render(request, template_name, context)
 
-    elif request.method == 'POST':
-        form_data = request.POST
+    else:
 
-        print("\n\n{}\n\n".format(form_data['payment_id']))
+        # order_id is form_data['order_id']
+        # payment_id is form_date['payment_id']
 
         context = { 'payment_id': form_data['payment_id'] }
 

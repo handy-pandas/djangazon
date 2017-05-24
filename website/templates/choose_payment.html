@@ -11,7 +11,7 @@
 
         <h4>Choose your payment type.</h4>
 
-        <form action="{% url 'website:payment' %}" method="post">
+        <form action="{% url 'website:confirmation' %}" method="post">
         {% csrf_token %}
             <select name="payment_id" required>
                 {% for payment in payments %}
@@ -20,6 +20,7 @@
                 
                 {% endfor %}
             </select>
+            <input name="order_id" type="hidden" value="{{ order_id }}"/>
 
             <input class="btn btn-success" type="submit" value="Done"/>
         </form>

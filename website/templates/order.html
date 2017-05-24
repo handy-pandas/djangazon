@@ -13,12 +13,19 @@
         <ol>
             {% for o in orders %}
             {% for product in o.products.all %}
-            <li>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{product.title}}</a>
-            <p>Price: {{product.price}}</p></li>
+            <li>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a>
+            <p>Price: {{ product.price }}</p></li>
             {% endfor %}
             {% endfor %}
         </ol>
         <p><strong>Order Total: ${{ total }} </strong></p>
-        <a class="btn btn-success" href="{% url 'website:payment' %}">Complete order</a>
+
+        <form action="{% url 'website:payment' %}" method="post">
+        {% csrf_token %}
+            <input name="order_id" type="hidden" value="{{ order_id }}"/>
+            <input name="payment_id" type="hidden" value="Needed"/>
+            <input class="btn btn-success" type="submit" value="Continue to Choose Payment Type"/>
+        </form>
+
     </body>
 </html>

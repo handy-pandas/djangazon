@@ -7,13 +7,11 @@
         {%include "styles.html"%}
     </head>
     <body>
-        <!-- Navbar -->
         {%include "navbar.html"%}
-        <!-- Main content -->
 
-        <h1>Success</h1>
-        <h2>You did it!!</h2>
+        <h1>Success!</h1>
+        <h2>You have Completed your order.</h2>
 
-        <button class="btn btn-success">Home</button>   <!-- Check send home-->
+        <a href="{% url 'website:index' %}" class="btn btn-success">Home</a>
     </body>
 </html>
