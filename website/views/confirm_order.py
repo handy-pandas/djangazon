@@ -19,12 +19,12 @@ def confirm_order(request):
     # order_id is form_data['order_id']
     # payment_id is form_date['payment_id']
     form_data = request.POST
+
+    payment = Payment.objects.get(id=form_data['payment_id'])
+
     order = Order.objects.get(id=form_data['order_id'], payment=None)
-    order.payment = form_data['payment_id']
+    order.payment = payment
     order.save()
-
-    print(form_data)
-
 
     template_name = 'confirmation.html'
     return render(request, template_name, {})

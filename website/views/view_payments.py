@@ -17,7 +17,7 @@ def view_payments(request):
         Adam Myers
     """
     form_data = request.POST
-    
+
     if form_data['payment_id'] == 'Needed':
         payments = Payment.objects.filter(user__id=1)
 
@@ -31,7 +31,7 @@ def view_payments(request):
         # order_id is form_data['order_id']
         # payment_id is form_date['payment_id']
 
-        context = { 'payment_id': form_data['payment_id'] }
+        context = { 'payment_id': form_data['payment_id'], 'order_id': form_data['order_id'] }
 
         template_name = 'confirmation.html'
         return render(request, template_name, context)

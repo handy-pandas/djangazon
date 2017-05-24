@@ -21,13 +21,20 @@ def view_order(request):
     total = 0
     order_id = None
 
-    orders = Order.objects.filter(user__id=1, payment=None)
-    for o in orders:
-        order_id = o.id
-        for product in o.products.all():
-            total = total + product.price
+    try:
+        order = Order.objects.get(user__id=1, payment=None)
 
-    context = { 'orders': orders, 'total': total, 'order_id': order_id }
+    except Order.DoesNotExist:
+        order = Order(
+            user = request.user,
+            payment = None
+            )
+        order.save()
+
+    for product in order.products.all():
+        total = total + product.price
+
+    context = { 'order': order, 'total': total, 'order_id': order_id }
 
     template_name = 'order.html'
     return render(request, template_name, context)

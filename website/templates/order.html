@@ -11,11 +11,9 @@
 
         <h2>Order Preview</h2>
         <ol>
-            {% for o in orders %}
-            {% for product in o.products.all %}
+            {% for product in order.products.all %}
             <li>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a>
             <p>Price: {{ product.price }}</p></li>
-            {% endfor %}
             {% endfor %}
         </ol>
         <p><strong>Order Total: ${{ total }} </strong></p>
