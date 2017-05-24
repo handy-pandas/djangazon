@@ -4,25 +4,42 @@
     <head>
         <meta charset="utf-8">
         <title>Bangazon</title>
+
         {%include "styles.html"%}
     </head>
     <body>
+
         {%include "navbar.html"%}
 
         <h2>Order Preview</h2>
         <ol>
+
             {% for product in order.products.all %}
+
             <li>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a>
             <p>Price: {{ product.price }}</p></li>
+
             {% endfor %}
         </ol>
         <p><strong>Order Total: ${{ total }} </strong></p>
 
         <form action="{% url 'website:payment' %}" method="post">
+
         {% csrf_token %}
+
             <input name="order_id" type="hidden" value="{{ order_id }}"/>
             <input name="payment_id" type="hidden" value="Needed"/>
+
+            {% if not order.products.all  %}
+
+            <a href="{% url 'website:index' %}" class="btn btn-success">Please Add Products</a>
+
+            {% else %}
+
             <input class="btn btn-success" type="submit" value="Continue to Choose Payment Type"/>
+
+            {% endif %}
+
         </form>
 
     </body>

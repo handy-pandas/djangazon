@@ -19,7 +19,7 @@ def view_payments(request):
     form_data = request.POST
 
     if form_data['payment_id'] == 'Needed':
-        payments = Payment.objects.filter(user__id=1)
+        payments = Payment.objects.filter(user=request.user)
 
         context = { 'payments': payments, 'order_id': form_data['order_id'] }
 

@@ -21,7 +21,7 @@ def view_order(request):
     total = 0
 
     try:
-        order = Order.objects.get(user__id=1, payment=None)
+        order = Order.objects.get(user=request.user, payment=None)
 
     except Order.DoesNotExist:
         order = Order(
