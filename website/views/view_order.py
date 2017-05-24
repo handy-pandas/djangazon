@@ -19,7 +19,6 @@ def view_order(request):
     # request.user.id
     # order = Order.objects.filter(user=request.user, payment=None)
     total = 0
-    order_id = None
 
     try:
         order = Order.objects.get(user__id=1, payment=None)
@@ -34,7 +33,7 @@ def view_order(request):
     for product in order.products.all():
         total = total + product.price
 
-    context = { 'order': order, 'total': total, 'order_id': order_id }
+    context = { 'order': order, 'total': total, 'order_id': order.id }
 
     template_name = 'order.html'
     return render(request, template_name, context)
