@@ -17,6 +17,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_products(self):
+        return Product.objects.filter(category=self)[:3]
 
 
 class Payment(models.Model):
@@ -56,6 +58,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
+        related_name='products'
     )
     is_active = models.IntegerField(default=0, choices=options)
 
