@@ -59,6 +59,13 @@ class Product(models.Model):
     )
     is_active = models.IntegerField(default=0, choices=options)
 
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ["title"]
+
+
 
 class ProductOrder(models.Model):
     product = models.ForeignKey(
