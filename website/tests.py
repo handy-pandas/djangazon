@@ -4,6 +4,9 @@ from website.views.view_category_products import *
 from django.urls import reverse
 
 # Test 1
+# Verify that when a specific product category view (e.g. Electronics) 
+# is requested,
+ # that there are products in the response context
 class CategoryViewTests(TestCase):
 	def test_list_category_products(self):
 		seller = User.objects.create(username="test_user")
@@ -13,7 +16,7 @@ class CategoryViewTests(TestCase):
 		response = self.client.get(reverse('website:category_products', args=[category.id]))
 		self.assertQuerysetEqual(
 		response.context['products'],
-		['<Product: Test>', '<Product: Test1>']
+		['<Potato: Test>', '<Panda: Test1>']
 		)
 
 # Verify that when n products are added to an order that the Order Summary view has those products in the response context
