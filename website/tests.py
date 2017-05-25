@@ -4,6 +4,9 @@ from website.views.view_category_products import *
 from django.urls import reverse
 
 # Test 1
+# Verify that when a specific product category view (e.g. Electronics) 
+# is requested,
+ # that there are products in the response context
 class CategoryViewTests(TestCase):
 	def test_list_category_products(self):
 		seller = User.objects.create(username="test_user")
@@ -16,6 +19,22 @@ class CategoryViewTests(TestCase):
 		['<Product: Test>', '<Product: Test1>']
 		)
 
+# Verify that when n products are added to an order that the Order Summary view has those products in the response context
+# Test 2
+class OrderSummaryViewTests(TestCase):
+    def test_view_order(self):
+        c = Client()
+        seller = User.objects.create(username="test_user_12", password="thankyouadam1")
+        category = Category.objects.create(name="test_category")
+        product = Product.objects.create(seller=seller, title="Test12", description="Please work buddy!", price="7", quantity="1", category=category)
+        product_2 = Product.objects.create(seller=seller, title="Test12", description="Please work buddy!", price="7", quantity="1", category=category)
+        order_yo = Order.objects.create(user=seller, payment_id=None)
+        pro_ord = ProductOrder.objects.create(order=order_yo, product=product)
+        pro_ord = ProductOrder.objects.create(order=order_yo, product=product_2)
+        logged_in = c.force_login(seller, backend=None)
+        response = c.get(reverse('website:order'))
+        self.assertContains(response, product)
+        self.assertContains(response, product_2)
 
 # Test 3
 class ProductDetailViewTests(TestCase):
