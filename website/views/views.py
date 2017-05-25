@@ -105,27 +105,3 @@ def profile(request):
 def add_payment(request):
     template_name = 'addpayment.html'
     return render(request, template_name, {})
-
-def add_product_to_order(request):
-    """Summary
-    
-    Author:
-        Nick Nash
-
-    Args:
-        request: The full HTTP request object
-    
-    Returns:
-        render: The HTTP request, the template to display and the model (DICT) being passed
-    """
-    template_name = 'categoryproducts.html'
-    return render(request, template_name, {})
-
-
-
-
-
-
-
-
-
