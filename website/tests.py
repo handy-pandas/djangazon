@@ -16,7 +16,7 @@ class CategoryViewTests(TestCase):
 		response = self.client.get(reverse('website:category_products', args=[category.id]))
 		self.assertQuerysetEqual(
 		response.context['products'],
-		['<Potato: Test>', '<Panda: Test1>']
+		['<Product: Test>', '<Product: Test1>']
 		)
 
 # Verify that when n products are added to an order that the Order Summary view has those products in the response context
