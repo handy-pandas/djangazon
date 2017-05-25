@@ -13,6 +13,7 @@ def product_details(request, product_id):
 
 	Author:
 	    Nick Nash
+	    wocaldwell
 
 	Args:
 	    request (List): A list of tuples from the database
