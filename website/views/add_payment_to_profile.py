@@ -3,15 +3,18 @@ from website.forms.form_payment import PaymentForm
 from website.models.models import Payment
 
 def add_payment(request):
-	"""This function allows user to add payment data to database.
+	"""This function allows user to add payment data for their profile to database.
 
+	
+	Arguments:
+	    request (POST): Sends data from payment form to payment table 
+	    
+	Returns:     
+		return (render): The profile form with add payment link is displayed
+	
 	Author:
 	    Angela Lee
-	
-	Args:
-	    request (POST): Sends data from payment form to payment table 
-	
-	
+
 	"""
 
 	if request.method == 'GET':
@@ -22,8 +25,6 @@ def add_payment(request):
 	elif request.method == 'POST':
 		form_data = request.POST
 		payment_form = PaymentForm()
-		# template_name = 'addpayment.html'
-		# return render(request, template_name, {'payment_form': payment_form})
 		
 		p = Payment(
 			name = form_data['name'],
