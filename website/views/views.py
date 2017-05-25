@@ -106,9 +106,9 @@ def add_payment(request):
     template_name = 'addpayment.html'
     return render(request, template_name, {})
 
-
-
-
+def add_product_to_order(request):
+    template_name = 'categoryproducts.html'
+    return render(request, template_name, {})
 
 
 
