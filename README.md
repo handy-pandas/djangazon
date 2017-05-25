@@ -67,7 +67,10 @@ In your browser you should see somthing like this:
 ![home screen](images/djangazon-home.jpg?raw=true)
 
 ## Running the tests
-TBD
+Navigate to the djangazon directory and type this command:
+```
+python manage.py test website
+```
 
 ## Deployment
 No additional resources required.
