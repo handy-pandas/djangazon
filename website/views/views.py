@@ -99,12 +99,18 @@ def list_products(request):
 
 
 def profile(request):
+    """This function allows user to access their profile page
+
+    Returns:     
+        return (render): The profile form with add payment link is displayed
+    
+    Author:
+        Angela Lee
+
+    """
     template_name = 'profile.html'
     return render(request, template_name, {})
 
-def add_payment(request):
-    template_name = 'addpayment.html'
-    return render(request, template_name, {})
 
 def add_product_to_order(request):
     template_name = 'categoryproducts.html'
