@@ -3,6 +3,20 @@ from website.forms.form_product import ProductForm
 from website.models.models import Product, Category
 
 def sell_product(request):
+    """This function allows the user to add a product to the Product table to be sold and handles the exception of improper values from the form.
+
+    Arguments:
+        request: django request format containing information about the request.
+
+    Returns:
+        request: django request format containing information about the request.
+        template_name (HTML): The webpage's structure
+        product_form (Dict): This is the form information formating a product information
+
+    Author:
+        Adam Myers
+        Nick Nash
+    """
     if request.method == 'GET':
         template_name = 'product/create.html'
         product_form = ProductForm()

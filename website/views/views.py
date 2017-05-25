@@ -111,16 +111,6 @@ def profile(request):
     template_name = 'profile.html'
     return render(request, template_name, {})
 
-
-def add_product_to_order(request):
-    template_name = 'categoryproducts.html'
+def add_payment(request):
+    template_name = 'addpayment.html'
     return render(request, template_name, {})
-
-
-
-
-
-
-
-
-
