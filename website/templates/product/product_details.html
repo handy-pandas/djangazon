@@ -25,7 +25,11 @@
 			{% if user.is_authenticated %}
 			<a href="{% url 'website:sell' %}">Add another product</a>
 			<br>
-			<button class="btn btn-success">Add to order</button>
+			<form action="{% url 'website:product_details' product.id %}" method="post">
+				{% csrf_token %}
+				<input type="hidden" name="product.id" value="{{product.id}}">
+				<input class="btn btn-success" type="submit" value="Add to order">
+			</form>
 			{% endif %}
 		</div>
 	</div>
