@@ -18,17 +18,29 @@ def view_order(request):
     """
     # request.user.id
     # order = Order.objects.filter(user=request.user, payment=None)
+    try:
+        if request.POST['cancel_payment']:
+            order = Order.objects.get(user=request.user, payment=None)
+            order.delete()
+
+            context = {}
+
+            template_name = 'order.html'
+            return render(request, template_name, context)
+    except KeyError:
+        pass
+
     total = 0
 
     try:
         order = Order.objects.get(user=request.user, payment=None)
 
     except Order.DoesNotExist:
-        order = Order(
-            user = request.user,
-            payment = None
-            )
-        order.save()
+        
+        context = {}
+
+        template_name = 'order.html'
+        return render(request, template_name, context)
 
     for product in order.products.all():
         total = total + product.price
@@ -37,4 +49,10 @@ def view_order(request):
 
     template_name = 'order.html'
     return render(request, template_name, context)
+
+
+
+
+
+
 
