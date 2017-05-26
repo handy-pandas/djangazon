@@ -18,6 +18,18 @@ def view_order(request):
     """
     # request.user.id
     # order = Order.objects.filter(user=request.user, payment=None)
+    try:
+        if request.POST['cancel_payment']:
+            order = Order.objects.get(user=request.user, payment=None)
+            order.delete()
+
+            context = { 'order': 'boop', 'total': 0, 'order_id': 'noneya' }
+
+            template_name = 'order.html'
+            return render(request, template_name, context)
+    except KeyError:
+        pass
+
     total = 0
 
     try:
@@ -37,4 +49,10 @@ def view_order(request):
 
     template_name = 'order.html'
     return render(request, template_name, context)
+
+
+
+
+
+
 

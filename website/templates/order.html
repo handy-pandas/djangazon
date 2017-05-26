@@ -38,9 +38,16 @@
 
             <input class="btn btn-success" type="submit" value="Continue to Choose Payment Type"/>
 
+        </form>
+        <form action="{% url 'website:order' %}" method="post">
+
+        {% csrf_token %}
+
+            <input name="cancel_payment" type="hidden" value="True"/>
+            <input class="btn btn-danger" type="submit" value="Cancel Order"/>
+        </form>
             {% endif %}
 
-        </form>
 
     </body>
 </html>
