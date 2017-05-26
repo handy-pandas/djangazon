@@ -1,5 +1,6 @@
 from django.contrib.auth.models import *
 from django.db import models
+from django.contrib import auth
 
 # Create your models here.
 # check data types
@@ -47,6 +48,9 @@ class Order(models.Model):
     def get_products(self):
         return ProductOrder.objects.filter(order_id=self)
 
+    def get_product_count(self):
+        return ProductOrder.objects.filter(order_id=self).count()
+
 class Product(models.Model):
     seller = models.ForeignKey(
         User,
@@ -79,4 +83,14 @@ class ProductOrder(models.Model):
     order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE,
+        related_name='productorders'
     )
+
+def get_cart_items(self):
+    order = Order.objects.get(user=self, payment=None)
+    return order.get_product_count()
+
+User.add_to_class('get_cart_items', get_cart_items)
+
+
+
