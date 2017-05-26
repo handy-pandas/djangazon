@@ -28,6 +28,7 @@ class Payment(models.Model):
         User,
         on_delete=models.CASCADE,
     )
+    is_active = models.IntegerField(default=1, choices=options)
 
 
 class Order(models.Model):

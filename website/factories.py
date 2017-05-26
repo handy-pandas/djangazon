@@ -69,6 +69,7 @@ class PaymentFactory(factory.django.DjangoModelFactory):
     name = factory.Faker('name')
     account_number = factory.Faker('random_int', min=1000000000000000, max=9999999999999999)
     user = factory.Iterator(User.objects.all())
+    is_active = 1
 
 class OrderFactory(factory.django.DjangoModelFactory):
     """
