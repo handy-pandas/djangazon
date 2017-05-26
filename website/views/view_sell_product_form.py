@@ -3,11 +3,11 @@ from website.forms.form_product import ProductForm
 from website.models.models import Product, Category
 
 def sell_product(request):
-    """This function allows the user to add a product to the Product table to be sold and handles the exception of improper values from the form.
-
+    """This function allows the user to add a product to the Product table to be sold.
+    
     Arguments:
         request: django request format containing information about the request.
-
+    
     Returns:
         request: django request format containing information about the request.
         template_name (HTML): The webpage's structure
@@ -48,4 +48,4 @@ def sell_product(request):
 
         p.save()
         template_name = 'product/product_details.html'
-        return render(request, template_name, {'product': form_data})
+        return render(request, template_name, { 'product': p })
