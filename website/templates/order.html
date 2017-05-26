@@ -14,13 +14,23 @@
         <h2>Order Preview</h2>
 
             {% if order.products.all  %}
+
         <ol>
             {% for product in order.products.all %}
-
             <li>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a>
             <p>Price: {{ product.price }}</p></li>
 
+        <form action="{% url 'website:order' %}" method="post">
+
+        {% csrf_token %}
+
+            <input name="delete_product" type="hidden" value="{{ product.id }}"/>
+            <input class="btn btn-danger btn-sm" type="submit" value="Delete Product"/>
+
+        </form>
+
             {% endfor %}
+
         </ol>
         <p><strong>Order Total: ${{ total }} </strong></p>
             {% endif %}

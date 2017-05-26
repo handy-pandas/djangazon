@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from website.models.models import Order, Product
+from website.models.models import Order, Product, ProductOrder
 
 def view_order(request):
     """This function allows the order's information to be displayed as prescribed.
@@ -29,6 +29,22 @@ def view_order(request):
             return render(request, template_name, context)
     except KeyError:
         pass
+
+
+    try:
+        if 'delete_product' in request.POST:
+            product = request.POST['delete_product']
+            order = Order.objects.get(user=request.user, payment=None)
+            delete_this_product = ProductOrder.objects.filter(order=order, product__id=product)
+
+
+            print('hello')
+
+            delete_this_product.delete()
+
+    except KeyError:
+        pass
+
 
     total = 0
 
