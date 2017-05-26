@@ -12,8 +12,9 @@
         {%include "navbar.html"%}
 
         <h2>Order Preview</h2>
-        <ol>
 
+            {% if order.products.all  %}
+        <ol>
             {% for product in order.products.all %}
 
             <li>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a>
@@ -22,6 +23,7 @@
             {% endfor %}
         </ol>
         <p><strong>Order Total: ${{ total }} </strong></p>
+            {% endif %}
 
         <form action="{% url 'website:payment' %}" method="post">
 

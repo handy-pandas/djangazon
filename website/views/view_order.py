@@ -23,7 +23,7 @@ def view_order(request):
             order = Order.objects.get(user=request.user, payment=None)
             order.delete()
 
-            context = { 'order': 'boop', 'total': 0, 'order_id': 'noneya' }
+            context = {}
 
             template_name = 'order.html'
             return render(request, template_name, context)
