@@ -29,8 +29,8 @@ class OrderSummaryViewTests(TestCase):
         product = Product.objects.create(seller=seller, title="Test12", description="Please work buddy!", price="7", quantity="1", category=category)
         product_2 = Product.objects.create(seller=seller, title="Test12", description="Please work buddy!", price="7", quantity="1", category=category)
         order_yo = Order.objects.create(user=seller, payment_id=None)
-        pro_ord = ProductOrder.objects.create(order=order_yo, product=product)
-        pro_ord = ProductOrder.objects.create(order=order_yo, product=product_2)
+        ProductOrder.objects.create(order=order_yo, product=product)
+        ProductOrder.objects.create(order=order_yo, product=product_2)
         logged_in = c.force_login(seller, backend=None)
         response = c.get(reverse('website:order'))
         self.assertContains(response, product)
@@ -64,3 +64,20 @@ class ProductArttributeTests(TestCase):
 		self.assertContains(
 			response, product.quantity
 		)
+
+# Verify that the Payment Types view for a customer has all of the payment types in the request context
+# Test 6
+class PaymentViewTests(TestCase):
+    def test_payments_show_in_payments_view(self):
+        c = Client()
+        customer = User.objects.create(username="test_user_1")
+        payment = Payment.objects.create(name='Visa', account_number=1234567, user=customer, is_active=1)
+        logged_in = c.force_login(customer, backend=None)
+        response = c.get(reverse('website:profile/view_payments'))
+        self.assertContains(
+            response, payment.name
+        )
+
+
+
+
