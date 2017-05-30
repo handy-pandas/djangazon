@@ -65,13 +65,14 @@ class Product(models.Model):
         related_name='products'
     )
     is_active = models.IntegerField(default=0, choices=options)
+    city = models.CharField(max_length=50)
+    image_path = models.CharField(max_length=50)
 
     def __str__(self):
         return self.title
 
     class Meta:
         ordering = ["title"]
-
 
 
 class ProductOrder(models.Model):
@@ -84,6 +85,7 @@ class ProductOrder(models.Model):
         on_delete=models.CASCADE,
         related_name='productorders'
     )
+    quantity = models.IntegerField()
 
 def get_cart_items(self):
     order = Order.objects.get(user=self, payment=None)
@@ -97,4 +99,25 @@ User.add_to_class('get_cart_items', get_cart_items)
 # User.add_to_class('profile', profile)
 
 
+class Profile(models.Model):
+    phone_number = models.CharField(max_length=20)
+    address = models.CharField(max_length=20)
+    city = models.CharField(max_length=60)
+    state = models.CharField(max_length=20)
+    zipcode = models.CharField(max_length=20)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    
 
+class Opinion(models.Model):
+    like = models.IntegerField(default=0, choices=options)
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
