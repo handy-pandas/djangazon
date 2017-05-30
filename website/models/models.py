@@ -66,7 +66,7 @@ class Product(models.Model):
     )
     is_active = models.IntegerField(default=0, choices=options)
     city = models.CharField(max_length=50)
-    photo = models.CharField(max_length=25)
+    image_path = models.CharField(max_length=50)
 
     def __str__(self):
         return self.title

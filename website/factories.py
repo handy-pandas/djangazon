@@ -129,7 +129,8 @@ class ProductFactory(factory.django.DjangoModelFactory):
     category = factory.Iterator(Category.objects.all())
     is_active = 1
     city = factory.Faker('city')
-    photo = factory.Faker('random_int', min=10, max=50)
+    image_path = factory.Faker('file_path', depth=1, category=None, extension=None)
+    
 
 class ProductOrderFactory(factory.django.DjangoModelFactory):
     """
