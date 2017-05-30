@@ -128,7 +128,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     quantity = factory.Faker('random_int', min=10, max=50)
     category = factory.Iterator(Category.objects.all())
     is_active = 1
-    city = factory.Faker('word')
+    city = factory.Faker('city')
     photo = factory.Faker('random_int', min=10, max=50)
 
 class ProductOrderFactory(factory.django.DjangoModelFactory):
@@ -166,11 +166,11 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     """
     class Meta:
         model = Profile
-    phone_number = factory.Faker('random_int')
-    address = factory.Faker('word')
-    city = factory.Faker('word')
-    state = factory.Faker('word')
-    zipcode = factory.Faker('random_int')
+    phone_number = factory.Faker('phone_number')
+    address = factory.Faker('address')
+    city = factory.Faker('city')
+    state = factory.Faker('state_abbr')
+    zipcode = factory.Faker('postalcode')
     user = factory.Iterator(User.objects.all())
 
 
