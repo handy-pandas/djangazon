@@ -89,7 +89,12 @@ def get_cart_items(self):
     order = Order.objects.get(user=self, payment=None)
     return order.get_product_count()
 
+# def get_profile_for_user(self):
+#     profile = Profile.objects.get(user=self)
+#     return profile
+
 User.add_to_class('get_cart_items', get_cart_items)
+# User.add_to_class('profile', profile)
 
 
 

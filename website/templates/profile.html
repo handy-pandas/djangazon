@@ -7,13 +7,27 @@
   </head>
 
   <body>
-      {%include "navbar.html"%}
-      <h1>View Your Profile</h1>
-
-      <div>
-        <a href="{% url 'website:profile/view_payments' %}">View Payments</a>
-        <a href="{% url 'website:add_payment' %}">Add Payment</a>
-      </div>
-
+      	{%include "navbar.html"%}
+      	<div class="container">
+      		<div class="row">
+      			<div class="text-right">
+      				<a class="btn btn-default" href="{% url 'website:profile/edit_account' %}">Edit account</a>
+      			</div>
+	      		<h2>{{user.first_name}} {{user.last_name}}</h2>
+			<p>Address here</p>
+			<p>Phone number here</p>
+			<p>Payments options:</p>
+			{% for payment in payments %}
+				<ul>
+					<li>{{payment.name}}</li>
+				</ul>
+			{% endfor %}
+			<p>Order History here</p>
+	      		<div>
+				<a href="{% url 'website:profile/view_payments' %}">View Payments</a>
+				<a href="{% url 'website:add_payment' %}">Add Payment</a>
+	      		</div>
+      		</div>
+      	</div>
   </body>
 </html>
