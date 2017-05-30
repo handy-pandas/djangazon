@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bangazon</title>
+    {%include "styles.html"%}
+  </head>
+  <body>
+    {%include "navbar.html"%}
+    <h1>My Products</h1><br>
+    {% for product in products %}
+    <ul>
+        <li id="{{product.id}}">Title: <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
+        <li>Price: ${{ product.price }}</li>
+        <li>Units Sold: Needs method attached for this</li>
+        <li>Quantity Remaining: {{ product.quantity }}</li>
+        <form id="login_form" method="post" action="{% url 'website:my_products' %}">
+            {% csrf_token %}
+            <input name="product_id" type="hidden" value="{{ product.id }}"/>
+            <input class="btn btn-danger" type="submit" value="Delete Product"/>
+        </form>
+    </ul><br>
+    {% endfor %}
+  </body>
+</html>
