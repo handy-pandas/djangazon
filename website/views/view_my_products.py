@@ -28,8 +28,13 @@ def my_products(request):
         product = Product.objects.get(id=data['product_id'])
 
         try:
-            order = Order.objects.get(user=request.user, payment__isnull=False)
-            test = ProductOrder.objects.filter(order=order, product=product)
+            orders = Order.objects.filter(payment__isnull=False)
+            continue_loop = True
+            for each in orders:
+                if continue_loop == True:
+                    po = ProductOrder.objects.filter(order=each, product=product)
+                else:
+                    break
             product.is_active = 0
             product.save()
 

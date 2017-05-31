@@ -96,7 +96,6 @@ class ProductOrder(models.Model):
     )
     order = models.ForeignKey(
         Order,
-        on_delete=models.CASCADE,
         related_name='productorders'
     )
     quantity = models.IntegerField()

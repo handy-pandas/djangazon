@@ -60,6 +60,10 @@ def view_order(request):
 
     for product in order.products.all():
         po = ProductOrder.objects.get(product=product, order=order)
+        if po.quantity > product.quantity:
+            po.delete()
+        if product.is_active == 0:
+            po.delete()
         amount = product.price * po.quantity
         total = total + amount
 
