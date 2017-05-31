@@ -59,7 +59,9 @@ def view_order(request):
         return render(request, template_name, context)
 
     for product in order.products.all():
-        total = total + product.price
+        po = ProductOrder.objects.get(product=product, order=order)
+        amount = product.price * po.quantity
+        total = total + amount
 
     context = { 'order': order, 'total': total, 'order_id': order.id }
 
