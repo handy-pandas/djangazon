@@ -37,6 +37,7 @@ def sell_product(request):
             template_name = 'product/create.html'
             return render(request, template_name, { 'product_form': product_form, 'error_message': error_message })
 
+            
         p = Product(
             seller = request.user,
             title = form_data['title'],
@@ -44,9 +45,16 @@ def sell_product(request):
             price = form_data['price'],
             quantity = form_data['quantity'],
             category = Category.objects.get(pk=form_data['category']),
+            local_delivery = form_data['local_delivery'],
             city = form_data['city']
         )
-        print("city type", type(p.city))
+        try:
+            p.local_delivery = True
+
+        except:
+            p.local_delivery = False
+
+            
         p.save()
         template_name = 'product/product_details.html'
         return render(request, template_name, { 'product': p })

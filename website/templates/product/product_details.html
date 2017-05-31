@@ -46,7 +46,7 @@
 			<h4>Product Quantity: {{product.quantity}}</h4>
 			<h4>Product Price: ${{product.price}}</h4>
 			
-			{% if product.city is not Null %}
+			{% if product.city != "" %}
 			<h4>Local Delivery available for {{product.city}}</h4>
 
 			{%endif%}
