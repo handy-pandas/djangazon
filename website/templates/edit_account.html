@@ -15,10 +15,10 @@
 			<input class="form-control" type="text" name="first_name" value="{{user.first_name}}" style="width: 30%;">
 			<h4>Last name</h4>
 			<input class="form-control" type="text" name="last_name" value="{{user.last_name}}" style="width: 30%;">
-			<h4>Username</h4>
-			<input class="form-control" type="text" name="phone_number" value="867" style="width: 30%;">
+			<h4>Phone number</h4>
+			<input class="form-control" type="text" name="phone_number" value="{{profile.phone_number}}" style="width: 30%;">
 			<h4>Address</h4>
-			<input class="form-control" type="text" name="address" value="123 fork ave" style="width: 30%;">
+			<input class="form-control" type="text" name="address" value="{{profile.address}}" style="width: 30%;">
 
 			{% csrf_token %}
 			<!-- Insert hidden input value here -->

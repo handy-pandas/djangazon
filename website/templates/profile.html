@@ -14,14 +14,8 @@
       				<a class="btn btn-default" href="{% url 'website:profile/edit_account' %}">Edit account</a>
       			</div>
 	      		<h2>{{user.first_name}} {{user.last_name}}</h2>
-			<p>Address here</p>
-			<p>Phone number here</p>
-			<p>Payments options:</p>
-			{% for payment in payments %}
-				<ul>
-					<li>{{payment.name}}</li>
-				</ul>
-			{% endfor %}
+			<p>Address here: {{profile.address}}</p>
+			<p>Phone number here: {{profile.phone_number}}</p>
 			<p>Order History here</p>
 	      		<div>
 				<a href="{% url 'website:profile/view_payments' %}">View Payments</a>
