@@ -30,7 +30,7 @@ def add_payment(request):
 			name = form_data['name'],
 			account_number = form_data['account_number'],
 			user = request.user
-		)
+		) 
 
 		p.save()
 		template_name = 'view_payment_types.html'
