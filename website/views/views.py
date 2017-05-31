@@ -102,7 +102,7 @@ def list_products(request):
 
 
 def profile(request):
-    """This function allows the user after the confirmation of an order to choose a payment type.
+    """This function allows the user to access his/her profile information.
     
     Arguments:
         request (List): A list of tuples from the database pertaining to payment
