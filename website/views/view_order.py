@@ -65,6 +65,8 @@ def view_order(request):
         if po.quantity > product.quantity:
             po.quantity = product.quantity
             po.save()
+        if po.quantity == 0:
+            po.delete()
         amount = product.price * po.quantity
         total = total + amount
 
