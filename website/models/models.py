@@ -18,7 +18,7 @@ class Category(models.Model):
         return self.name
 
     def get_products(self):
-        return Product.objects.filter(category=self)[:3]
+        return Product.objects.filter(category=self, is_active=1)[:3]
 
 
 class Payment(models.Model):
@@ -48,7 +48,11 @@ class Order(models.Model):
         return ProductOrder.objects.filter(order_id=self)
 
     def get_product_count(self):
-        return ProductOrder.objects.filter(order_id=self).count()
+        pos = ProductOrder.objects.filter(order_id=self)
+        total = 0
+        for each in pos:
+            total = total + each.quantity
+        return total
 
 class Product(models.Model):
     seller = models.ForeignKey(
@@ -64,9 +68,19 @@ class Product(models.Model):
         on_delete=models.CASCADE,
         related_name='products'
     )
-    is_active = models.IntegerField(default=0, choices=options)
+    is_active = models.IntegerField(default=1, choices=options)
     city = models.CharField(max_length=50)
     image_path = models.CharField(max_length=50)
+
+    def sold_count(self):
+        pos = ProductOrder.objects.select_related("order", "product").filter(product=self, order__payment__isnull=False)
+        total = 0
+        for each in pos:
+            total = total + each.quantity
+        return total
+
+    def get_count_on_order(self):
+        return ProductOrder.objects.filter(product=self)
 
     def __str__(self):
         return self.title

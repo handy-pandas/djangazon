@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from website.models.models import Order, Product, Payment
+from website.models.models import Order, Product, Payment, ProductOrder
 
 def confirm_order(request):
     """This function updates the payment type in the order table.
@@ -23,6 +23,14 @@ def confirm_order(request):
     payment = Payment.objects.get(id=form_data['payment_id'])
 
     order = Order.objects.get(id=form_data['order_id'], payment=None)
+
+    print("\n\n\n\n\nHERE IT IS -->> {}\n\n\n".format(order.products.all()))
+
+    for each in order.products.all():
+        po = ProductOrder.objects.get(product=each, order=order)
+        each.quantity = each.quantity - po.quantity
+        each.save()
+
     order.payment = payment
     order.save()
 

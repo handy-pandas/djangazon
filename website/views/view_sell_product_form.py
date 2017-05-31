@@ -44,6 +44,7 @@ def sell_product(request):
             price = form_data['price'],
             quantity = form_data['quantity'],
             category = Category.objects.get(pk=form_data['category']),
+            is_active = 1,
         )
 
         p.save()

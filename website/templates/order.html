@@ -17,8 +17,18 @@
 
         <ol>
             {% for product in order.products.all %}
-            <li>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a>
-            <p>Price: {{ product.price }}</p></li>
+            <li>
+                <p>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></p>
+
+                {% for each in product.get_count_on_order %}
+                    {% if each.order.id == order.id  %}
+                        <p>Quantity: {{ each.quantity }}</p>
+                    {% else %}
+                    {% endif %}
+                {% endfor %}
+
+                <p>Price: ${{ product.price }}</p>
+            </li>
 
         <form action="{% url 'website:order' %}" method="post">
 

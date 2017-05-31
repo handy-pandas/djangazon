@@ -14,7 +14,7 @@ def list_category_products(request, category_id):
     Author:
         wocaldwell
     """
-    all_products_in_cat = Product.objects.filter(category_id=category_id)
+    all_products_in_cat = Product.objects.filter(category_id=category_id, is_active=1)
     category_name = all_products_in_cat[0].category
     print(category_name)
     template_name = 'categoryproducts.html'

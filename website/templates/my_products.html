@@ -13,7 +13,7 @@
     <ul>
         <li id="{{product.id}}">Title: <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
         <li>Price: ${{ product.price }}</li>
-        <li>Units Sold: Needs method attached for this</li>
+        <li>Units Sold: {{ product.sold_count }}</li>
         <li>Quantity Remaining: {{ product.quantity }}</li>
         <form id="login_form" method="post" action="{% url 'website:my_products' %}">
             {% csrf_token %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from website.models.models import Product
+from website.models.models import Product, Order, ProductOrder
 
 def my_products(request):
     """
@@ -16,7 +16,7 @@ def my_products(request):
     """
     if request.method == 'GET':
 
-        product_for_sale = Product.objects.filter(seller=request.user)
+        product_for_sale = Product.objects.filter(seller=request.user, is_active=1)
         template_name = 'my_products.html'
         context = {'products': product_for_sale}
         return render(request, template_name, context)
@@ -26,9 +26,19 @@ def my_products(request):
         data = request.POST
 
         product = Product.objects.get(id=data['product_id'])
-        print("\n\n\n{}\n\n\n".format(product))
+
+        try:
+            order = Order.objects.get(user=request.user, payment__isnull=False)
+            test = ProductOrder.objects.filter(order=order, product=product)
+            product.is_active = 0
+            product.save()
+
+        except (ProductOrder.DoesNotExist, Order.DoesNotExist):
+            product.delete()
 
         product_for_sale = Product.objects.filter(seller=request.user)
         template_name = 'my_products.html'
         context = {'products': product_for_sale}
         return render(request, template_name, context)
+
+

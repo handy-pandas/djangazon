@@ -10,7 +10,7 @@ from website.models.models import Product
 
 def index(request):
     template_name = 'index.html'
-    all_products = Product.objects.all().order_by('-id')[:20]
+    all_products = Product.objects.filter(is_active=1).order_by('-id')[:20]
     return render(request, template_name, {'products': all_products})
 
 
@@ -93,7 +93,7 @@ def user_logout(request):
     return HttpResponseRedirect('/')
 
 def list_products(request):
-    all_products = Product.objects.all()
+    all_products = Product.objects.filter(is_active=1)
     template_name = 'product/list.html'
     return render(request, template_name, {'products': all_products})
 

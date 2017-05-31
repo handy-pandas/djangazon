@@ -39,11 +39,18 @@ def product_details(request, product_id):
 				)
 			order.save()	
 
-		po = ProductOrder(
-			order = order,
-			product = chosen_product
-			)
-		po.save()
+		try:
+			po = ProductOrder.objects.get(order=order, product=chosen_product)
+			po.quantity = po.quantity + 1
+			po.save()
+
+		except ProductOrder.DoesNotExist:
+			po = ProductOrder(
+				order = order,
+				product = chosen_product,
+				quantity = 1
+				)
+			po.save()
 
 
 		return render(request, template_name, {'product': chosen_product})
