@@ -14,5 +14,6 @@ from website.views.view_category_products import *
 from website.views.view_order import *
 from website.views.view_payments import *
 from website.views.view_products import *
-from website.views.view_sell_product_form import *
 from website.views.view_my_products import *
+from website.views.view_search_products import *
+from website.views.view_sell_product_form import *

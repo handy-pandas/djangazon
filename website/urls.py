@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^sell$', sell_product, name='sell'),
     url(r'^category_products/(?P<category_id>.+?)/$', list_category_products, name='category_products'),
     url(r'^products$', list_products, name='list_products'),
+    url(r'^search_products/$', search_products, name='search_products'),    
     url(r'^categories$', category_products, name='categories'),
     url(r'^product_details/(?P<product_id>.+?)/$', product_details, name='product_details'),
     url(r'^order$', view_order, name='order'),
