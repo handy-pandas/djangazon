@@ -1,4 +1,6 @@
 from django.conf.urls import url
+from django.conf.urls.static import static
+from django.conf import settings
 
 # Remember to include your view below
 # example: from website.views.view_category import *
@@ -21,4 +23,4 @@ urlpatterns = [
     url(r'^profile$', profile, name='profile'),
     url(r'^add_payment$', add_payment, name='add_payment'),
     url(r'^profile/view_payments$', view_payments, name='profile/view_payments')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
