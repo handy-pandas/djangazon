@@ -17,7 +17,31 @@
 		</ol>
 		<!-- Main content -->
 		<div class="main-content text-center">
-			<h1>Product title: {{product.title}}</h1>
+			<div class="row">
+				<div class="col-xs-8">
+					<h1>Product title: {{product.title}}</h1>
+				</div>
+				<div class="col-xs-2">
+				{% if user.is_authenticated %}
+					<form action="{% url 'website:product_details' product.id %}" method="post">
+						{% csrf_token %}
+						<input name="like" type="hidden" value="{{ product.id }}"/>
+						<input class="btn btn-success" type="submit" value="Like">
+					</form>
+				</div>
+				<div class="col-xs-2">
+					<form action="{% url 'website:product_details' product.id %}" method="post">
+						{% csrf_token %}
+						<input name="dislike" type="hidden" value="{{ product.id }}"/>
+						<input class="btn btn-success" type="submit" value="Dislike">
+					</form>
+				</div>
+				{%else%}
+				</div>
+				<div class="col-xs-2">
+				</div>
+				{%endif%}
+			</div>
 			<h4>Product Description: {{product.description}}</h4>
 			<h4>Product Quantity: {{product.quantity}}</h4>
 			<h4>Product Price: ${{product.price}}</h4>
