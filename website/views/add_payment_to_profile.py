@@ -33,5 +33,5 @@ def add_payment(request):
 		)
 
 		p.save()
-		template_name = 'profile.html'
+		template_name = 'view_payment_types.html'
 		return render(request, template_name, {'payment_form': payment_form})
