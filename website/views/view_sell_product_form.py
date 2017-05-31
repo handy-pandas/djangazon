@@ -1,13 +1,14 @@
 from django.shortcuts import render
+# from django.template import RequestContext
 from website.forms.form_product import ProductForm
 from website.models.models import Product, Category
 
 def sell_product(request):
     """This function allows the user to add a product to the Product table to be sold.
-    
+
     Arguments:
         request: django request format containing information about the request.
-    
+
     Returns:
         request: django request format containing information about the request.
         template_name (HTML): The webpage's structure
@@ -24,6 +25,7 @@ def sell_product(request):
 
     elif request.method == 'POST':
         form_data = request.POST
+        form_file = request.FILES
         error_message = None
 
         if int(form_data['quantity']) < 1:
@@ -33,7 +35,7 @@ def sell_product(request):
             error_message = 'Please enter a positve number into price.'
 
         if error_message is not None:
-            product_form = ProductForm()
+            product_form = ProductForm(request.POST, request.FILES)
             template_name = 'product/create.html'
             return render(request, template_name, { 'product_form': product_form, 'error_message': error_message })
 
@@ -44,6 +46,8 @@ def sell_product(request):
             price = form_data['price'],
             quantity = form_data['quantity'],
             category = Category.objects.get(pk=form_data['category']),
+            city = form_data['city'],
+            image_path = form_file['image_path']
         )
 
         p.save()

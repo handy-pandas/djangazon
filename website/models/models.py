@@ -66,7 +66,7 @@ class Product(models.Model):
     )
     is_active = models.IntegerField(default=0, choices=options)
     city = models.CharField(max_length=50)
-    image_path = models.CharField(max_length=50)
+    image_path = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.title
@@ -104,7 +104,7 @@ class Profile(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    
+
 
 class Opinion(models.Model):
     like = models.IntegerField(default=0, choices=options)
