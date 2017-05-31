@@ -1,8 +1,9 @@
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
-    <form class="navbar-form navbar-left" role="search">
+    <form id="search_box" action="{% url 'website:search_products' %}" type="get" accept-charset="utf-8" class="navbar-form navbar-left">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
+        <input id="search_box" value="{{request.GET.q}}" name="q" type="text" class="form-control" placeholder="Search">
+        <button id="search" type="submit"></button>
       </div>
     </form>
     <ul class="nav navbar-nav">
