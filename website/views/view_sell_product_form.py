@@ -17,6 +17,7 @@ def sell_product(request):
     Author:
         Adam Myers
         Nick Nash
+        wocaldwell
     """
     if request.method == 'GET':
         template_name = 'product/create.html'
@@ -25,7 +26,6 @@ def sell_product(request):
 
     elif request.method == 'POST':
         form_data = request.POST
-        form_file = request.FILES
         error_message = None
 
         if int(form_data['quantity']) < 1:
@@ -38,7 +38,10 @@ def sell_product(request):
             product_form = ProductForm(request.POST, request.FILES)
             template_name = 'product/create.html'
             return render(request, template_name, { 'product_form': product_form, 'error_message': error_message })
-
+        if 'image_path' in request.FILES:
+            image_path = request.FILES['image_path']
+        else:
+            image_path = None
         p = Product(
             seller = request.user,
             title = form_data['title'],
@@ -46,8 +49,7 @@ def sell_product(request):
             price = form_data['price'],
             quantity = form_data['quantity'],
             category = Category.objects.get(pk=form_data['category']),
-            city = form_data['city'],
-            image_path = form_file['image_path']
+            image_path = image_path
         )
 
         p.save()
