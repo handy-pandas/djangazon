@@ -15,3 +15,5 @@ from website.views.view_order import *
 from website.views.view_payments import *
 from website.views.view_products import *
 from website.views.view_sell_product_form import *
+from website.views.edit_account_view import *
+from website.views.view_search_products import *

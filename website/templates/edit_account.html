@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bangazon</title>
+	{%include "styles.html"%}
+</head>
+<body>
+	{%include "navbar.html"%}
+	<div class="container">
+		<a href="{% url 'website:profile' %}">Back to profile</a>
+		<form class="form-inline" action="{% url 'website:profile/edit_account' %}" method="post">
+			<h4>First name</h4>
+			<input class="form-control" type="text" name="first_name" value="{{user.first_name}}" style="width: 30%;">
+			<h4>Last name</h4>
+			<input class="form-control" type="text" name="last_name" value="{{user.last_name}}" style="width: 30%;">
+			<h4>Phone number</h4>
+			<input class="form-control" type="text" name="phone_number" value="{{profile.phone_number}}" style="width: 30%;">
+			<h4>Address</h4>
+			<input class="form-control" type="text" name="address" value="{{profile.address}}" style="width: 30%;">
+			<h4>City</h4>
+			<input class="form-control" type="text" name="city" value="{{profile.city}}" style="width: 30%;">
+			<h4>State</h4>
+			<input class="form-control" type="text" name="state" value="{{profile.state}}" style="width: 30%;">
+			<h4>ZIP</h4>
+			<input class="form-control" type="text" name="zipcode" value="{{profile.zip}}" style="width: 30%;">
+			{% csrf_token %}
+			<!-- Insert hidden input value here -->
+			<input class="btn btn-primary" type="submit" name="update" value="Update">
+		</form>
+	</div>
+</body>
+</html>

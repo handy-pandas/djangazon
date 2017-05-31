@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^sell$', sell_product, name='sell'),
     url(r'^category_products/(?P<category_id>.+?)/$', list_category_products, name='category_products'),
     url(r'^products$', list_products, name='list_products'),
+    url(r'^search_products/$', search_products, name='search_products'),    
     url(r'^categories$', category_products, name='categories'),
     url(r'^product_details/(?P<product_id>.+?)/$', product_details, name='product_details'),
     url(r'^order$', view_order, name='order'),
@@ -21,5 +22,6 @@ urlpatterns = [
     url(r'^confirmation$', confirm_order, name='confirmation'),
     url(r'^profile$', profile, name='profile'),
     url(r'^add_payment$', add_payment, name='add_payment'),
-    url(r'^profile/view_payments$', view_payments, name='profile/view_payments')
+    url(r'^profile/view_payments$', view_payments, name='profile/view_payments'),
+    url(r'^profile/edit_account$', edit_account, name="profile/edit_account")
 ]
