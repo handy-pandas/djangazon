@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from website.forms.form_product import ProductForm
 from website.models.models import Product, Category
-
+from django.utils.datastructures import MultiValueDictKeyError 
 def sell_product(request):
     """This function allows the user to add a product to the Product table to be sold.
     
@@ -25,7 +25,16 @@ def sell_product(request):
     elif request.method == 'POST':
         form_data = request.POST
         error_message = None
+        delivery = None
+        try:
+            if form_data['local_delivery']:
+                delivery = True
+        
+        except MultiValueDictKeyError:
+            delivery = False
+            
 
+       
         if int(form_data['quantity']) < 1:
             error_message = 'Please enter a positive number into quantity.'
 
@@ -45,14 +54,10 @@ def sell_product(request):
             price = form_data['price'],
             quantity = form_data['quantity'],
             category = Category.objects.get(pk=form_data['category']),
-            local_delivery = form_data['local_delivery'],
+            local_delivery = delivery,
             city = form_data['city']
+        
         )
-        try:
-            p.local_delivery = True
-
-        except:
-            p.local_delivery = False
 
             
         p.save()
