@@ -7,31 +7,27 @@ from website.models.models import Product
 
 
 def search_products(request):
-    '''
-    blablblba something about searching
-    '''
+    """This function allows user to search for items by their title or description
 
-    # terms = request.GET.get('terms')
-    # if request.method == 'GET':
+    
+    Arguments:
+        request (GET): retrieves data from the search input and filters through products
+        
+    Returns:     
+        return (render): The search products results are rendered on the search products page
+    
+    Author:
+        Angela Lee
+
+    """
+
     if request.GET.get('q', False):    
         form_data = request.GET
-        print("form_data", form_data)
         iterable_form_data = form_data.dict()
-        print("form_data", iterable_form_data)
-        for (k,v) in iterable_form_data.items():
-            print(k)
-            print(v)
-
-        search_box = iterable_form_data[k]
-        # search_box = form_data["search_box"]
-        print("search box", search_box)
         
+        for (k,v) in iterable_form_data.items():
+            search_box = iterable_form_data[k]
         products = Product.objects.all()
-
-        # q = Q(description__icontains=search_box) | Q(title__icontains=search_box)
-        # for term in term_list[1:]:
-        #     q.add((Q(description__icontains=term) | Q(title__icontains=term)), q.connector)
-
         products = Product.objects.filter(Q(description__icontains=search_box) | Q(title__icontains=search_box))
         template_name = 'search_products.html'
 
