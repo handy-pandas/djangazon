@@ -5,13 +5,11 @@ from website.models.models import Product
 
 class ProductForm(forms.ModelForm):
 
-	city = forms.CharField(required = False)
+
 	local_delivery = forms.BooleanField(required= False)
+	city = forms.CharField(required = False)
 
-
-	
 	class Meta:
 		model = Product
 		fields = ('title', 'description', 'price', 'quantity', 'category', 'local_delivery','city')
-
 
