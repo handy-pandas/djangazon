@@ -149,7 +149,6 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
         model = ProductOrder
     product = factory.Iterator(Product.objects.all())
     order = factory.Iterator(Order.objects.all())
-    quantity = factory.Faker('random_int', min=10, max=50)
 
 
 class ProfileFactory(factory.django.DjangoModelFactory):

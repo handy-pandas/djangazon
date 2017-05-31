@@ -58,19 +58,31 @@ def view_order(request):
         template_name = 'order.html'
         return render(request, template_name, context)
 
-    for product in order.products.all():
-        po = ProductOrder.objects.get(product=product, order=order)
+    new_list = list()
+
+    for product in order.products.all().distinct():
+        pos = ProductOrder.objects.filter(product=product, order=order)
+        pos_count = pos.count()
+
         if product.is_active == 0:
-            po.delete()
-        if po.quantity > product.quantity:
-            po.quantity = product.quantity
-            po.save()
-        if po.quantity == 0:
-            po.delete()
-        amount = product.price * po.quantity
+            pos.delete()
+        if pos_count > product.quantity:
+            diff = pos_count - product.quantity
+            pos[:diff].delete()
+
+        new_dict = dict()
+        new_dict['count'] = pos_count
+        new_dict['title'] = product.title
+        new_dict['price'] = product.price
+        new_dict['id'] = product.id
+        new_list.append(new_dict)
+
+        amount = product.price * pos_count
         total = total + amount
 
-    context = { 'order': order, 'total': total, 'order_id': order.id }
+
+
+    context = { 'order': order, 'total': total, 'order_id': order.id, 'product_list': new_list }
 
     template_name = 'order.html'
     return render(request, template_name, context)

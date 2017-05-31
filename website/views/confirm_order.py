@@ -25,8 +25,8 @@ def confirm_order(request):
     order = Order.objects.get(id=form_data['order_id'], payment=None)
 
     for each in order.products.all():
-        po = ProductOrder.objects.get(product=each, order=order)
-        each.quantity = each.quantity - po.quantity
+        pos = ProductOrder.objects.get(product=each, order=order).count()
+        each.quantity = each.quantity - pos
         each.save()
 
     order.payment = payment

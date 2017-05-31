@@ -27,19 +27,14 @@ def my_products(request):
 
         product = Product.objects.get(id=data['product_id'])
 
-        try:
-            orders = Order.objects.filter(payment__isnull=False)
-            continue_loop = True
-            for each in orders:
-                if continue_loop == True:
-                    po = ProductOrder.objects.filter(order=each, product=product)
-                else:
-                    break
+        pos = ProductOrder.objects.select_related("order", "product").filter(product=product, order__payment__isnull=False).count()
+
+        if pos == 0:
+            product.delete()
+        else:
             product.is_active = 0
             product.save()
 
-        except (ProductOrder.DoesNotExist, Order.DoesNotExist):
-            product.delete()
 
         product_for_sale = Product.objects.filter(seller=request.user, is_active=1, quantity__gt=0)
         template_name = 'my_products.html'

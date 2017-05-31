@@ -48,11 +48,7 @@ class Order(models.Model):
         return ProductOrder.objects.filter(order_id=self)
 
     def get_product_count(self):
-        pos = ProductOrder.objects.filter(order_id=self)
-        total = 0
-        for each in pos:
-            total = total + each.quantity
-        return total
+        return ProductOrder.objects.filter(order_id=self).count()
 
 class Product(models.Model):
     seller = models.ForeignKey(
@@ -73,14 +69,10 @@ class Product(models.Model):
     image_path = models.CharField(max_length=50)
 
     def sold_count(self):
-        pos = ProductOrder.objects.select_related("order", "product").filter(product=self, order__payment__isnull=False)
-        total = 0
-        for each in pos:
-            total = total + each.quantity
-        return total
+        return ProductOrder.objects.select_related("order", "product").filter(product=self, order__payment__isnull=False).count()
 
-    def get_count_on_order(self):
-        return ProductOrder.objects.filter(product=self)
+    def get_count_on_order(self, order_id):
+        return ProductOrder.objects.filter(product=self, order=order_id).count()
 
     def __str__(self):
         return self.title
@@ -96,9 +88,9 @@ class ProductOrder(models.Model):
     )
     order = models.ForeignKey(
         Order,
+        on_delete=models.CASCADE,
         related_name='productorders'
     )
-    quantity = models.IntegerField()
 
 def get_cart_items(self):
     order = Order.objects.get(user=self, payment=None)
