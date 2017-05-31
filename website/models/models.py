@@ -91,9 +91,7 @@ def get_cart_items(self):
     order = Order.objects.get(user=self, payment=None)
     return order.get_product_count()
 
-
-User.add_to_class('get_cart_items', get_cart_items)
-# User.add_to_class('profile', profile)
+User.add_to_class('get_cart_items', get_cart_ite
 
 
 class Profile(models.Model):
