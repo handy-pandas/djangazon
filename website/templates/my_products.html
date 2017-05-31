@@ -9,6 +9,7 @@
   <body>
     {%include "navbar.html"%}
     <h1>My Products</h1><br>
+    {% if products%}
     {% for product in products %}
     <ul>
         <li id="{{product.id}}">Title: <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
@@ -22,5 +23,8 @@
         </form>
     </ul><br>
     {% endfor %}
+    {% else %}
+    <a href="{% url 'website:sell' %}" class="btn btn-warning">Sell a Product</a>
+    {% endif %}
   </body>
 </html>

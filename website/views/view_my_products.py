@@ -16,7 +16,7 @@ def my_products(request):
     """
     if request.method == 'GET':
 
-        product_for_sale = Product.objects.filter(seller=request.user, is_active=1)
+        product_for_sale = Product.objects.filter(seller=request.user, is_active=1, quantity__gt=0)
         template_name = 'my_products.html'
         context = {'products': product_for_sale}
         return render(request, template_name, context)
@@ -36,7 +36,7 @@ def my_products(request):
         except (ProductOrder.DoesNotExist, Order.DoesNotExist):
             product.delete()
 
-        product_for_sale = Product.objects.filter(seller=request.user)
+        product_for_sale = Product.objects.filter(seller=request.user, is_active=1, quantity__gt=0)
         template_name = 'my_products.html'
         context = {'products': product_for_sale}
         return render(request, template_name, context)

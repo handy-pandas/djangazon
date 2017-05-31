@@ -10,7 +10,7 @@ from website.models.models import Product, Payment, Profile
 
 def index(request):
     template_name = 'index.html'
-    all_products = Product.objects.filter(is_active=1).order_by('-id')[:20]
+    all_products = Product.objects.filter(is_active=1, quantity__gt=0).order_by('-id')[:20]
     return render(request, template_name, {'products': all_products})
 
 
@@ -96,7 +96,7 @@ def user_logout(request):
     return HttpResponseRedirect('/')
 
 def list_products(request):
-    all_products = Product.objects.filter(is_active=1)
+    all_products = Product.objects.filter(is_active=1, quantity__gt=0)
     template_name = 'product/list.html'
     return render(request, template_name, {'products': all_products})
 
@@ -118,7 +118,6 @@ def profile(request):
         Angela Lee
         Nick Nash
     """
-
     user = request.user
     user_profile = Profile.objects.get(pk=user.id)
     context = { 'profile': user_profile }

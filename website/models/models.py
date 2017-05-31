@@ -18,7 +18,7 @@ class Category(models.Model):
         return self.name
 
     def get_products(self):
-        return Product.objects.filter(category=self, is_active=1)[:3]
+        return Product.objects.filter(category=self, is_active=1, quantity__gt=0)[:3]
 
 
 class Payment(models.Model):

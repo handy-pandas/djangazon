@@ -5,6 +5,7 @@ fixtures
 
 import factory
 from website.models.models import *
+from django.contrib.auth.models import *
 
 class CategoryFactory(factory.django.DjangoModelFactory):
     """

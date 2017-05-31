@@ -14,7 +14,7 @@
       				<a class="btn btn-default" href="{% url 'website:profile/edit_account' %}">Edit account</a>
       			</div>
 	      		<h2>{{user.first_name}} {{user.last_name}}</h2>
-                        <p>Address: {{profile.address}} {{profile.city}}, {{profile.state}} {{profile.zipcode}}</p>
+                        <p>Address: {{profile.address}} {{profile.city}} {{profile.state}} {{profile.zipcode}}</p>
                         <p>Phone: <a href="#">{{profile.phone_number}}</a></p>
                         <p>Order History here</p>
 	      		<div>
