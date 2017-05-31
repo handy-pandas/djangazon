@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 
 from website.forms.forms import UserForm
-from website.models.models import Product
+from website.models.models import Product, Payment, Profile
 
 
 def index(request):
@@ -39,6 +39,9 @@ def register(request):
             # Once hashed, we can update the user object.
             user.set_password(user.password)
             user.save()
+            profile = Profile(user_id=user.id)
+            profile.save()
+
 
             # Update our variable to tell the template registration was successful.
             registered = True
@@ -99,18 +102,32 @@ def list_products(request):
 
 
 def profile(request):
-    """This function allows user to access their profile page
-
-    Returns:     
-        return (render): The profile form with add payment link is displayed
+    """This function allows the user to access his/her profile information.
     
-    Author:
-        Angela Lee
+    Arguments:
+        request (List): A list of tuples from the database pertaining to payment
+    
+    Returns:
+        request: A list of tuples from the database
+        template_name (HTML): The webpage's structure
+        payment (Dict): This is the payment information stored inside of a dictionary
 
+    Author:
+        Talbot Lawrence
+        Adam Myers
+        Angela Lee
+        Nick Nash
     """
+
+    user = request.user
+    user_profile = Profile.objects.get(pk=user.id)
+    context = { 'profile': user_profile }
     template_name = 'profile.html'
-    return render(request, template_name, {})
+    return render(request, template_name, context)
+
 
 def add_payment(request):
     template_name = 'addpayment.html'
     return render(request, template_name, {})
+
+

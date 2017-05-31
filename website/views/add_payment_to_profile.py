@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from website.forms.form_payment import PaymentForm
 from website.models.models import Payment
 
@@ -30,8 +30,8 @@ def add_payment(request):
 			name = form_data['name'],
 			account_number = form_data['account_number'],
 			user = request.user
-		)
+		) 
 
 		p.save()
-		template_name = 'profile.html'
-		return render(request, template_name, {'payment_form': payment_form})
+		template_name = 'view_payment_types.html'
+		return redirect('/profile')

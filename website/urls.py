@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^confirmation$', confirm_order, name='confirmation'),
     url(r'^profile$', profile, name='profile'),
     url(r'^add_payment$', add_payment, name='add_payment'),
-    url(r'^profile/view_payments$', view_payments, name='profile/view_payments')
+    url(r'^profile/view_payments$', view_payments, name='profile/view_payments'),
+    url(r'^profile/edit_account$', edit_account, name="profile/edit_account")
 ]
