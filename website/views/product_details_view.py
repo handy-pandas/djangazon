@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from website.forms.forms import UserForm
 from website.forms.form_product import ProductForm
-from website.models.models import Product, Category, Order, ProductOrder
+from website.models.models import Product, Category, Order, ProductOrder, Opinion
 
 
 def product_details(request, product_id):
@@ -23,11 +23,32 @@ def product_details(request, product_id):
 	    template_name (HTML): The webpage's structure
 	    product (Dict): This is the product's information stored inside of a dictionary
 	"""
+	template_name = 'product/product_details.html'
+	chosen_product = Product.objects.get(pk=product_id)
 
-	if request.method == "POST":
+	if 'like' in request.POST:
+		liked_product = chosen_product
+		opinion = Opinion(
+			like=1,
+			product=liked_product,
+			user=request.user
+		)
 
-		chosen_product = Product.objects.get(pk=product_id)
-		template_name = 'product/product_details.html'
+		opinion.save()
+
+	if 'dislike' in request.POST:
+		disliked_product = chosen_product
+		opinion = Opinion(
+			like=0,
+			product=disliked_product,
+			user=request.user
+		)
+
+		opinion.save()
+
+	if 'product.id' in request.POST:
+
+
 
 		try:
 			order = Order.objects.get(user=request.user, payment=None)
@@ -37,7 +58,7 @@ def product_details(request, product_id):
 				user = request.user,
 				payment = None
 				)
-			order.save()	
+			order.save()
 
 		po = ProductOrder(
 			order = order,
@@ -46,10 +67,9 @@ def product_details(request, product_id):
 		po.save()
 
 
-		return render(request, template_name, {'product': chosen_product})
 
 
 	elif request.method == 'GET':
 		chosen_product = Product.objects.get(pk=product_id)
 		template_name = 'product/product_details.html'
-		return render(request, template_name, {'product': chosen_product})
+	return render(request, template_name, {'product': chosen_product})
