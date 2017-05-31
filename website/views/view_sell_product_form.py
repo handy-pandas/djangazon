@@ -30,7 +30,7 @@ def sell_product(request):
             error_message = 'Please enter a positive number into quantity.'
 
         if float(form_data['price']) < 0.01:
-            error_message = 'Please enter a positve number into price.'
+            error_message = 'Please enter a positive number into price.'
 
         if error_message is not None:
             product_form = ProductForm()
@@ -44,8 +44,9 @@ def sell_product(request):
             price = form_data['price'],
             quantity = form_data['quantity'],
             category = Category.objects.get(pk=form_data['category']),
+            city = form_data['city']
         )
-
+        print("city type", type(p.city))
         p.save()
         template_name = 'product/product_details.html'
         return render(request, template_name, { 'product': p })
