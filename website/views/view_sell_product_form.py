@@ -28,6 +28,7 @@ def sell_product(request):
         form_data = request.POST
         error_message = None
         delivery = None
+        city = None
         try:
             if form_data['local_delivery']:
                 delivery = True
@@ -35,6 +36,14 @@ def sell_product(request):
         except MultiValueDictKeyError:
             delivery = False
             
+        try: 
+            if delivery == True:
+                city = form_data['city']
+            elif delivery == False:
+                city = ""
+
+        except:
+            city = "" 
 
        
         if int(form_data['quantity']) < 1:
@@ -65,7 +74,7 @@ def sell_product(request):
             category = Category.objects.get(pk=form_data['category']),
             image_path = image_path,
             local_delivery = delivery,
-            city = form_data['city']
+            city = city
         
         )
 
