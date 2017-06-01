@@ -104,11 +104,11 @@ User.add_to_class('get_cart_items', get_cart_items)
 
 
 class Profile(models.Model):
-    phone_number = models.CharField(max_length=20)
-    address = models.CharField(max_length=20)
-    city = models.CharField(max_length=60)
-    state = models.CharField(max_length=20)
-    zipcode = models.CharField(max_length=20)
+    phone_number = models.IntegerField(null=True, blank=True)
+    address = models.CharField(max_length=40, null=True, blank=True)
+    city = models.CharField(max_length=60, null=True, blank=True)
+    state = models.CharField(max_length=20, null=True, blank=True)
+    zipcode = models.IntegerField(null=True, blank=True)
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
