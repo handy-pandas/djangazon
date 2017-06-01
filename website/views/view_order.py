@@ -58,13 +58,48 @@ def view_order(request):
         template_name = 'order.html'
         return render(request, template_name, context)
 
-    for product in order.products.all():
-        total = total + product.price
+    new_list = list()
 
-    context = { 'order': order, 'total': total, 'order_id': order.id }
+    for product in order.products.all().distinct():
+        pos = ProductOrder.objects.filter(product=product, order=order)
+        pos_count = pos.count()
+
+        if product.is_active == 0:
+            pos.delete()
+        if product.quantity == 0:
+            pos.delete()
+        if pos_count > product.quantity:
+            diff = pos_count - product.quantity
+            pos.delete()
+            create_productorders(product.quantity, product, order)
+            pos = ProductOrder.objects.filter(product=product, order=order)
+            pos_count = pos.count()
+
+
+        new_dict = dict()
+        new_dict['count'] = pos_count
+        new_dict['title'] = product.title
+        new_dict['price'] = product.price
+        new_dict['id'] = product.id
+        new_list.append(new_dict)
+
+        amount = product.price * pos_count
+        total = total + amount
+
+
+
+    context = { 'order': order, 'total': total, 'order_id': order.id, 'product_list': new_list }
 
     template_name = 'order.html'
     return render(request, template_name, context)
+
+def create_productorders(quantity, product_in, order_in):
+    for each in range(quantity):
+        po = ProductOrder(
+            product=product_in,
+            order=order_in
+            )
+        po.save()
 
 
 

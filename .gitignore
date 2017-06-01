@@ -8,4 +8,6 @@ obj
 *.sqlite3
 .DS_STORE
 /website/migrations
-/media/images
+
+/media
+

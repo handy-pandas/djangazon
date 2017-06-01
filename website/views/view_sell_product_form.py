@@ -52,6 +52,9 @@ def sell_product(request):
         if float(form_data['price']) < 0.01:
             error_message = 'Please enter a positive number into price.'
 
+        if float(form_data['price']) > 999999999:
+            error_message = 'Price cannot be higher than 9 digits.'
+
         if error_message is not None:
             product_form = ProductForm(request.POST, request.FILES)
             template_name = 'product/create.html'
@@ -74,8 +77,9 @@ def sell_product(request):
             category = Category.objects.get(pk=form_data['category']),
             image_path = image_path,
             local_delivery = delivery,
-            city = city
-        
+            city = city,
+            is_active = 1
+
         )
 
             

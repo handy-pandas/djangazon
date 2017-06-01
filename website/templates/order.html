@@ -16,9 +16,12 @@
             {% if order.products.all  %}
 
         <ol>
-            {% for product in order.products.all %}
-            <li>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a>
-            <p>Price: {{ product.price }}</p></li>
+            {% for product in product_list %}
+            <li>
+                <p>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></p>
+                <p>Quantity: {{ product.count }}</p>
+                <p>Price: ${{ product.price }}</p>
+            </li>
 
         <form action="{% url 'website:order' %}" method="post">
 
