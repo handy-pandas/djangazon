@@ -63,7 +63,7 @@ def sell_product(request):
             price = form_data['price'],
             quantity = form_data['quantity'],
             category = Category.objects.get(pk=form_data['category']),
-            image_path = image_path
+            image_path = image_path,
             local_delivery = delivery,
             city = form_data['city']
         

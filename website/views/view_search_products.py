@@ -28,7 +28,7 @@ def search_products(request):
         for (k,v) in iterable_form_data.items():
             search_box = iterable_form_data[k]
         products = Product.objects.all()
-        products = Product.objects.filter(Q(description__icontains=search_box) | Q(title__icontains=search_box)| Q(city__icontains=search_box))
+        products = Product.objects.filter(Q(description__icontains=search_box) | Q(title__icontains=search_box))
         template_name = 'search_products.html'
 
         return render(request, template_name, {'products': products})
