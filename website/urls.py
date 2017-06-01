@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^add_payment$', add_payment, name='add_payment'),
     url(r'^profile/view_payments$', view_payments, name='profile/view_payments'),
     url(r'^profile/edit_account$', edit_account, name="profile/edit_account"),
-    url(r'^order_history$', edit_account, name="profile/edit_account")
+    url(r'^order_history$', view_order_history, name="order_history"),
+    url(r'^order_history/(?P<order_id>.+?)/$', view_order_details, name="order_details")
 ]
