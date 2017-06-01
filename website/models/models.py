@@ -18,7 +18,7 @@ class Category(models.Model):
         return self.name
 
     def get_products(self):
-        return Product.objects.filter(category=self)[:3]
+        return Product.objects.filter(category=self, is_active=1, quantity__gt=0)[:3]
 
 
 class Payment(models.Model):
@@ -64,9 +64,15 @@ class Product(models.Model):
         on_delete=models.CASCADE,
         related_name='products'
     )
-    is_active = models.IntegerField(default=0, choices=options)
+    is_active = models.IntegerField(default=1, choices=options)
     city = models.CharField(max_length=50)
     image_path = models.ImageField(upload_to='images/', blank=True)
+
+    def sold_count(self):
+        return ProductOrder.objects.select_related("order", "product").filter(product=self, order__payment__isnull=False).count()
+
+    def get_count_on_order(self, order_id):
+        return ProductOrder.objects.filter(product=self, order=order_id).count()
 
     def __str__(self):
         return self.title
@@ -85,7 +91,6 @@ class ProductOrder(models.Model):
         on_delete=models.CASCADE,
         related_name='productorders'
     )
-    quantity = models.IntegerField()
 
 def get_cart_items(self):
     order = Order.objects.get(user=self, payment=None)

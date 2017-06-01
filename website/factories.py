@@ -5,6 +5,7 @@ fixtures
 
 import factory
 from website.models.models import *
+from django.contrib.auth.models import *
 
 class CategoryFactory(factory.django.DjangoModelFactory):
     """
@@ -148,7 +149,6 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
         model = ProductOrder
     product = factory.Iterator(Product.objects.all())
     order = factory.Iterator(Order.objects.all())
-    quantity = factory.Faker('random_int', min=10, max=50)
 
 
 class ProfileFactory(factory.django.DjangoModelFactory):
