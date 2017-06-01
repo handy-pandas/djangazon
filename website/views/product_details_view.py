@@ -60,11 +60,21 @@ def product_details(request, product_id):
 				)
 			order.save()
 
-		po = ProductOrder(
-			order = order,
-			product = chosen_product
-			)
-		po.save()
+		try:
+			pos = ProductOrder.objects.filter(order=order, product=chosen_product).count()
+			if chosen_product.quantity > pos:
+				po = ProductOrder(
+				order = order,
+				product = chosen_product
+				)
+				po.save()
+
+		except ProductOrder.DoesNotExist:
+			po = ProductOrder(
+				order = order,
+				product = chosen_product
+				)
+			po.save()
 
 
 
