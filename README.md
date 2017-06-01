@@ -47,6 +47,11 @@ Install Django:
 pip install django
 ```
 
+Install Pillow:
+```
+pip install Pillow
+```
+
 ### Installing
 Clone repo:
 

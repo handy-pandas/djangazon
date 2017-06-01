@@ -1,5 +1,6 @@
 from django.conf.urls import url
 
+
 # Remember to include your view below
 # example: from website.views.view_category import *
 from website.views import *
