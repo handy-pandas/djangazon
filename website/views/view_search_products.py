@@ -7,7 +7,7 @@ from website.models.models import Product
 
 
 def search_products(request):
-    """This function allows user to search for items by their title or description
+    """This function allows user to search for items by their title or description or city for local delivery 
 
     
     Arguments:
@@ -33,7 +33,7 @@ def search_products(request):
     products = Product.objects.all()
     print("\nproducts: {}\n".format(products))
 
-    if value == "local_checked":
+    if "local_checked":
         products = Product.objects.filter(Q(city__icontains=search_box))
     else:
         products = Product.objects.filter(Q(description__icontains=search_box) | Q(title__icontains=search_box))
