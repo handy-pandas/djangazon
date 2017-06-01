@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bangazon - Order Details</title>
+	{%include "styles.html"%}
+</head>
+<body>
+	<!-- Navbar -->
+	{%include "navbar.html"%}
+	<div class="container">
+		<a href="{% url 'website:order_history' %}">Back to order history</a>
+		<div class="row text-center">
+			<h1 style="text-decoration: underline;">Order Details (Order #{{order.id}})</h1>
+			{% for product in products %}
+				<p style="margin: 1em 13em 0 0; font-size: 2rem;"><strong>• {{product.title}}</strong> | ${{product.price}}</p>
+			{% endfor %}
+			<hr style="border-color: #000; border-width: 3px; width: 40%;">
+			<h3>Total: ${{total}}</h3>
+		</div>
+	</div>
+</body>
+</html>

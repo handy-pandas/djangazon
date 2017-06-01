@@ -14,7 +14,7 @@
     {% endif %}
     <ol>
     {% for product in products %}
-        <li id="{{product.id}}"><a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
+        <li><a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
     {% endfor %}
     </ol>
     <script
@@ -23,4 +23,4 @@
   crossorigin="anonymous"></script>
     <script type="text/javascript" src="static/javascripts.js"></script>
   </body>
-</html>
+</html> 
