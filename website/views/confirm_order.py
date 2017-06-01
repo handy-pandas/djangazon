@@ -24,7 +24,7 @@ def confirm_order(request):
 
     order = Order.objects.get(id=form_data['order_id'])
 
-    for each in order.products.all():
+    for each in order.products.all().distinct():
         pos = ProductOrder.objects.filter(product=each, order=order).count()
         each.quantity = each.quantity - pos
         each.save()
