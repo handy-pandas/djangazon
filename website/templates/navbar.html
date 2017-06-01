@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-static-top">
-  <div class="container-fluid">
+  <div class="container-fluid custom-navbar-container">
     <form id="search_box" action="{% url 'website:search_products' %}" type="get" accept-charset="utf-8" class="navbar-form navbar-left">
       <div class="form-group">
         <input id="search_box" value="{{request.GET.q}}" name="q" type="text" class="form-control" placeholder="Search">

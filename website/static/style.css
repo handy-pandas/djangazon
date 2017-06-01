@@ -1,3 +1,6 @@
-
+.custom-navbar-container {
+  background-color: #009999; }
+  .custom-navbar-container .nav li a {
+    color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
