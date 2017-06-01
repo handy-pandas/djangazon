@@ -5,7 +5,13 @@ def view_order_details(request, order_id):
 	"""This function will allow the user to view each individual order's details
 
 	Args:
-		request (TYPE): Description
+		request (LIST): A list of tuples from the database pertaining to order
+		order_id (INTEGER): The primary key of the chosen order
+
+	Returns:
+		request: A list of tuples from the database
+		template_name (HTML): The webpage's structure
+		payment (DICT): The orders completed by the current user, products on the order, and the order total
 
 	Author:
 		Nick Nash
