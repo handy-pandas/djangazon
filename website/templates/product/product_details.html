@@ -52,6 +52,11 @@
 			<h4>Product Description: {{product.description}}</h4>
 			<h4>Product Quantity: {{product.quantity}}</h4>
 			<h4>Product Price: ${{product.price}}</h4>
+			
+			{% if product.city != "" %}
+			<h4>Local Delivery available for {{product.city}}</h4>
+
+			{%endif%}
 			<a href="{% url 'website:index' %}">Back to products</a>
 			{% if user.is_authenticated %}
 			<a href="{% url 'website:sell' %}">Add another product</a>
@@ -64,5 +69,6 @@
 			{% endif %}
 		</div>
 	</div>
+	
 </body>
 </html>
