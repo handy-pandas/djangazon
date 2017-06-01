@@ -17,6 +17,6 @@ def view_order_history(request):
 	"""
 
 	template_name = 'order_history.html'
-	all_orders = Order.objects.filter(user=request.user)
+	all_orders = Order.objects.filter(user=request.user, payment__isnull=False)
 	context = {'orders': all_orders}
 	return render(request, template_name, context)
