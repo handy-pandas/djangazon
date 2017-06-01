@@ -22,10 +22,10 @@ def confirm_order(request):
 
     payment = Payment.objects.get(id=form_data['payment_id'])
 
-    order = Order.objects.get(id=form_data['order_id'], payment=None)
+    order = Order.objects.get(id=form_data['order_id'])
 
     for each in order.products.all():
-        pos = ProductOrder.objects.get(product=each, order=order).count()
+        pos = ProductOrder.objects.filter(product=each, order=order).count()
         each.quantity = each.quantity - pos
         each.save()
 
