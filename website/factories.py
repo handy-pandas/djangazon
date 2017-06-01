@@ -1,5 +1,5 @@
 """
-bangazon factory to create sample data to seed a database using Faker in lieu of using 
+bangazon factory to create sample data to seed a database using Faker in lieu of using
 fixtures
 """
 
@@ -130,8 +130,8 @@ class ProductFactory(factory.django.DjangoModelFactory):
     category = factory.Iterator(Category.objects.all())
     is_active = 1
     city = factory.Faker('city')
-    image_path = factory.Faker('file_path', depth=1, category=None, extension=None)
-    
+    # image_path = factory.Faker('file_path', depth=1, category=None, extension=None)
+
 
 class ProductOrderFactory(factory.django.DjangoModelFactory):
     """
