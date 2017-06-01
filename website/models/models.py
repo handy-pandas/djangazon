@@ -64,9 +64,13 @@ class Product(models.Model):
         on_delete=models.CASCADE,
         related_name='products'
     )
+
     is_active = models.IntegerField(default=1, choices=options)
     city = models.CharField(max_length=50)
     image_path = models.ImageField(upload_to='images/', blank=True)
+    local_delivery = models.BooleanField(default=False)
+    city = models.CharField(max_length=50, null=True)
+
 
     def sold_count(self):
         return ProductOrder.objects.select_related("order", "product").filter(product=self, order__payment__isnull=False).count()
