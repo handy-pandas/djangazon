@@ -66,9 +66,15 @@ def view_order(request):
 
         if product.is_active == 0:
             pos.delete()
+        if product.quantity == 0:
+            pos.delete()
         if pos_count > product.quantity:
             diff = pos_count - product.quantity
-            pos[:diff].delete()
+            pos.delete()
+            create_productorders(product.quantity, product, order)
+            pos = ProductOrder.objects.filter(product=product, order=order)
+            pos_count = pos.count()
+
 
         new_dict = dict()
         new_dict['count'] = pos_count
@@ -86,6 +92,14 @@ def view_order(request):
 
     template_name = 'order.html'
     return render(request, template_name, context)
+
+def create_productorders(quantity, product_in, order_in):
+    for each in range(quantity):
+        po = ProductOrder(
+            product=product_in,
+            order=order_in
+            )
+        po.save()
 
 
 
