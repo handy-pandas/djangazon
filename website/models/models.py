@@ -65,8 +65,10 @@ class Product(models.Model):
         related_name='products'
     )
     is_active = models.IntegerField(default=0, choices=options)
-    city = models.CharField(max_length=50)
     image_path = models.ImageField(upload_to='images/', blank=True)
+    local_delivery = models.BooleanField(default=False)
+    city = models.CharField(max_length=50, null=True)
+
 
     def __str__(self):
         return self.title
