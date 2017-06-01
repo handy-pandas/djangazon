@@ -2,7 +2,7 @@ from django.shortcuts import render
 # from django.template import RequestContext
 from website.forms.form_product import ProductForm
 from website.models.models import Product, Category
-
+from django.utils.datastructures import MultiValueDictKeyError 
 def sell_product(request):
     """This function allows the user to add a product to the Product table to be sold.
 
@@ -27,12 +27,30 @@ def sell_product(request):
     elif request.method == 'POST':
         form_data = request.POST
         error_message = None
+        delivery = None
+        city = None
+        try:
+            if form_data['local_delivery']:
+                delivery = True
+        
+        except MultiValueDictKeyError:
+            delivery = False
+            
+        try: 
+            if delivery == True:
+                city = form_data['city']
+            elif delivery == False:
+                city = ""
 
+        except:
+            city = "" 
+
+       
         if int(form_data['quantity']) < 1:
             error_message = 'Please enter a positive number into quantity.'
 
         if float(form_data['price']) < 0.01:
-            error_message = 'Please enter a positve number into price.'
+            error_message = 'Please enter a positive number into price.'
 
         if float(form_data['price']) > 999999999:
             error_message = 'Price cannot be higher than 9 digits.'
@@ -41,10 +59,15 @@ def sell_product(request):
             product_form = ProductForm(request.POST, request.FILES)
             template_name = 'product/create.html'
             return render(request, template_name, { 'product_form': product_form, 'error_message': error_message })
+
         if 'image_path' in request.FILES:
             image_path = request.FILES['image_path']
         else:
             image_path = None
+
+
+            
+
         p = Product(
             seller = request.user,
             title = form_data['title'],
@@ -52,10 +75,14 @@ def sell_product(request):
             price = form_data['price'],
             quantity = form_data['quantity'],
             category = Category.objects.get(pk=form_data['category']),
-            is_active = 1,
-            image_path = image_path
+            image_path = image_path,
+            local_delivery = delivery,
+            city = city,
+            is_active = 1
+
         )
 
+            
         p.save()
         template_name = 'product/product_details.html'
         return render(request, template_name, { 'product': p })

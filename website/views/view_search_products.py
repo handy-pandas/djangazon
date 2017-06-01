@@ -7,7 +7,7 @@ from website.models.models import Product
 
 
 def search_products(request):
-    """This function allows user to search for items by their title or description
+    """This function allows user to search for items by their title or description or city for local delivery 
 
     
     Arguments:
