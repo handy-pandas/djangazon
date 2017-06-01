@@ -1,9 +1,13 @@
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
-    <form id="search_box" action="{% url 'website:search_products' %}" type="get" accept-charset="utf-8" class="navbar-form navbar-left">
+    <form action="{% url 'website:search_products' %}" type="get" accept-charset="utf-8" class="navbar-form navbar-left">
       <div class="form-group">
-        <input id="search_box" value="{{request.GET.q}}" name="q" type="text" class="form-control" placeholder="Search">
+        <input value="{{request.GET.search}}" type="text" class="form-control" name="Search" placeholder="Search">   <!--.search above can be anything you want -->
       </div>
+
+      Local<input type="checkbox" value="True" name="local_delivery">
+      <input class="btn btn-primary btn-sm invisible" type="submit" value="Search">
+
     </form>
     <ul class="nav navbar-nav">
         <li class="">

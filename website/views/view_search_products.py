@@ -18,18 +18,21 @@ def search_products(request):
     
     Author:
         Angela Lee
-
+        Talbot Lawrence
+        Adam Myers
     """
+    form_data = request.GET
+    iterable_form_data = form_data.dict()
+    
+    search_box = iterable_form_data['Search']
 
-    if request.GET.get('q', False):    
-        form_data = request.GET
-        iterable_form_data = form_data.dict()
-        
-        for (k,v) in iterable_form_data.items():
-            search_box = iterable_form_data[k]
-        products = Product.objects.filter(Q(description__icontains=search_box) | Q(title__icontains=search_box), is_active=1, quantity__gt=0)
-        template_name = 'search_products.html'
+    try:
+        if iterable_form_data['local_delivery']:
+            products = Product.objects.filter(Q(city__icontains=search_box))
 
-        return render(request, template_name, {'products': products})
+    except KeyError:
+        products = Product.objects.filter(Q(description__icontains=search_box) | Q(title__icontains=search_box))
 
+    template_name = 'search_products.html'
 
+    return render(request, template_name, {'products': products})
