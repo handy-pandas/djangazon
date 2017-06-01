@@ -12,10 +12,11 @@
 	<div class="container">
 		<a href="{% url 'website:order_history' %}">Back to order history</a>
 		<div class="row text-center">
-			<h1>Order Details (Order #{{order.id}})</h1>
+			<h1 style="text-decoration: underline;">Order Details (Order #{{order.id}})</h1>
 			{% for product in products %}
-				<p><strong>• {{product.title}}</strong> | quantity here | price here: ${{product.price}}</p>
+				<p style="margin: 1em 13em 0 0; font-size: 2rem;"><strong>• {{product.title}}</strong> | ${{product.price}}</p>
 			{% endfor %}
+			<hr style="border-color: #000; border-width: 3px; width: 40%;">
 			<h3>Total: ${{total}}</h3>
 		</div>
 	</div>

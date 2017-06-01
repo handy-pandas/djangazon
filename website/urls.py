@@ -1,5 +1,6 @@
 from django.conf.urls import url
 
+
 # Remember to include your view below
 # example: from website.views.view_category import *
 from website.views import *
@@ -24,5 +25,7 @@ urlpatterns = [
     url(r'^profile/view_payments$', view_payments, name='profile/view_payments'),
     url(r'^profile/edit_account$', edit_account, name="profile/edit_account"),
     url(r'^order_history$', view_order_history, name="order_history"),
-    url(r'^order_history/(?P<order_id>.+?)/$', view_order_details, name="order_details")
+    url(r'^order_history/(?P<order_id>.+?)/$', view_order_details, name="order_details"),
+    url(r'^MyProducts$', my_products, name='my_products'),
+    url(r'^profile/edit_account$', edit_account, name="profile/edit_account")
 ]
