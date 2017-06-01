@@ -21,16 +21,21 @@ def search_products(request):
 
     """
 
-    if request.GET.get('q', False):    
-        form_data = request.GET
-        iterable_form_data = form_data.dict()
-        
-        for (k,v) in iterable_form_data.items():
-            search_box = iterable_form_data[k]
-        products = Product.objects.all()
+    # if request.GET.get('q', False):    
+    form_data = request.GET
+    print("\n\nform_data: {}\n\n".format(form_data))
+    iterable_form_data = form_data.dict()
+    print("\n\niterable_form_data: {}\n\n".format(iterable_form_data))
+    
+    for (k,v) in iterable_form_data.items():
+        search_box = iterable_form_data[k]
+        print("\n\nsearch_box: {}\n\n".format(search_box))
+    products = Product.objects.all()
+    print("\n\nproducts: {}\n\n".format(products))
+    if local_checked:
+        products = Product.objects.filter(Q(city__icontains=search_box))
+    else:
         products = Product.objects.filter(Q(description__icontains=search_box) | Q(title__icontains=search_box))
-        template_name = 'search_products.html'
+    template_name = 'search_products.html'
 
-        return render(request, template_name, {'products': products})
-
-
+    return render(request, template_name, {'products': products})
