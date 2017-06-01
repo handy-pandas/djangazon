@@ -18,10 +18,11 @@ def search_products(request):
     
     Author:
         Angela Lee
+        Talbot Lawrence
+        Adam Myers
     """
     form_data = request.GET
     iterable_form_data = form_data.dict()
-    print("\niterable_form_data: {}\n".format(iterable_form_data))
     
     search_box = iterable_form_data['Search']
 
