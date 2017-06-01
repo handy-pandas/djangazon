@@ -1,3 +1,5 @@
+"use strict";
+
 $(document).ready(function(){
 	$("#id_city").prop('disabled', true);
 });
