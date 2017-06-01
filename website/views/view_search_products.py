@@ -18,25 +18,20 @@ def search_products(request):
     
     Author:
         Angela Lee
-
     """
-
-    # if request.GET.get('q', False):    
     form_data = request.GET
-    print("\nform_data: {}\n".format(form_data))
     iterable_form_data = form_data.dict()
     print("\niterable_form_data: {}\n".format(iterable_form_data))
     
-    for (k,v) in iterable_form_data.items():
-        search_box = iterable_form_data[k]
-        print("\nsearch_box: {}\n".format(search_box))
-    products = Product.objects.all()
-    print("\nproducts: {}\n".format(products))
+    search_box = iterable_form_data['Search']
 
-    if "local_checked":
-        products = Product.objects.filter(Q(city__icontains=search_box))
-    else:
+    try:
+        if iterable_form_data['local_delivery']:
+            products = Product.objects.filter(Q(city__icontains=search_box))
+
+    except KeyError:
         products = Product.objects.filter(Q(description__icontains=search_box) | Q(title__icontains=search_box))
+
     template_name = 'search_products.html'
 
     return render(request, template_name, {'products': products})
