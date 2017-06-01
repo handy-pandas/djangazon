@@ -1,13 +1,14 @@
 from django.shortcuts import render
+# from django.template import RequestContext
 from website.forms.form_product import ProductForm
 from website.models.models import Product, Category
 
 def sell_product(request):
     """This function allows the user to add a product to the Product table to be sold.
-    
+
     Arguments:
         request: django request format containing information about the request.
-    
+
     Returns:
         request: django request format containing information about the request.
         template_name (HTML): The webpage's structure
@@ -16,6 +17,7 @@ def sell_product(request):
     Author:
         Adam Myers
         Nick Nash
+        wocaldwell
     """
     if request.method == 'GET':
         template_name = 'product/create.html'
@@ -36,10 +38,13 @@ def sell_product(request):
             error_message = 'Price cannot be higher than 9 digits.'
 
         if error_message is not None:
-            product_form = ProductForm()
+            product_form = ProductForm(request.POST, request.FILES)
             template_name = 'product/create.html'
             return render(request, template_name, { 'product_form': product_form, 'error_message': error_message })
-
+        if 'image_path' in request.FILES:
+            image_path = request.FILES['image_path']
+        else:
+            image_path = None
         p = Product(
             seller = request.user,
             title = form_data['title'],
@@ -48,6 +53,7 @@ def sell_product(request):
             quantity = form_data['quantity'],
             category = Category.objects.get(pk=form_data['category']),
             is_active = 1,
+            image_path = image_path
         )
 
         p.save()

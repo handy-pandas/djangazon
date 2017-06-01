@@ -66,7 +66,7 @@ class Product(models.Model):
     )
     is_active = models.IntegerField(default=1, choices=options)
     city = models.CharField(max_length=50)
-    image_path = models.CharField(max_length=50)
+    image_path = models.ImageField(upload_to='images/', blank=True)
 
     def sold_count(self):
         return ProductOrder.objects.select_related("order", "product").filter(product=self, order__payment__isnull=False).count()
@@ -109,7 +109,7 @@ class Profile(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    
+
 
 class Opinion(models.Model):
     like = models.IntegerField(default=0, choices=options)

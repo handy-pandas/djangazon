@@ -18,7 +18,16 @@
 		<!-- Main content -->
 		<div class="main-content text-center">
 			<div class="row">
-				<div class="col-xs-8">
+				<div class="col-xs-4">
+					{%if product.image_path%}
+					<img src="/media/{{product.image_path}}" alt="{{product.
+					title}}" width="150">
+					{%else%}
+					<img src="/media/images/no-image.jpg" alt="{{product.
+					title}}" width="150">
+					{%endif%}
+				</div>
+				<div class="col-xs-4">
 					<h1>Product title: {{product.title}}</h1>
 				</div>
 				<div class="col-xs-2">
