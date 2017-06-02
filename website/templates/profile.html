@@ -13,12 +13,40 @@
       			<div class="text-right">
       				<a class="btn btn-default" href="{% url 'website:profile/edit_account' %}">Edit account</a>
       			</div>
-	      		<h2>{{user.first_name}} {{user.last_name}}</h2>
-                        <p>Address: {{profile.address}} {{profile.city}}, {{profile.state}} {{profile.zipcode}}</p>
-                        <p>Phone: <a href="#">{{profile.phone_number}}</a></p>
-                        <p><a href="{% url 'website:profile/view_payments' %}">View payments</a></p>
-                        <p><a href="{% url 'website:add_payment' %}">Add payment</a></p>
-                        <p><a href="{% url 'website:order_history' %}">Order history</a></p>
+	      		<h2>Welcome To Your Profile Page</h2>
+            <h3><strong>{{user.first_name}} {{user.last_name}}</strong></h3>
+              <p>
+              Street: 
+                {% if profile.address %}
+                  {{profile.address}} 
+                {% endif %}
+              <p>
+              City: 
+                {% if profile.city %}
+                  {{profile.city}} 
+                {% endif %}
+              </p>
+              <p>
+              State: 
+                {% if profile.state %}
+                  {{profile.state}} 
+                {% endif %}
+              </p>
+              <p>
+              Zip Code: 
+                {% if profile.zipcode %}
+                  {{profile.zipcode}}
+                {% endif %}
+              </p>
+              <p>
+              Phone: 
+                {% if profile.phone_number %}
+                  {{profile.phone_number}}
+                {% endif %}
+              </p>
+              <p><a href="{% url 'website:profile/view_payments' %}">View payments</a></p>
+              <p><a href="{% url 'website:add_payment' %}">Add payment</a></p>
+              <p><a href="{% url 'website:order_history' %}">Order history</a></p>
       		</div>
       	</div>
   </body>
