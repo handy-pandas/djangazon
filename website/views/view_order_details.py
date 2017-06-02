@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from website.models.models import Order, Product, ProductOrder
+from website.models.models import Order, Product, ProductOrder, Rate
 
 def view_order_details(request, order_id):
     """This function will allow the user to view each individual order's details
@@ -17,7 +17,6 @@ def view_order_details(request, order_id):
         Nick Nash
         Adam Myers
     """
-
     # Grabbing all necessary information
     order = Order.objects.get(id=order_id)
 
@@ -28,6 +27,12 @@ def view_order_details(request, order_id):
     for product in order.products.all().distinct():
         pos = ProductOrder.objects.filter(product=product, order=order)
         pos_count = pos.count()
+
+        if request.method == 'POST':
+            if product.id == request.POST['product_id']:
+                product_rating = Rate.objects.get_or_create(user=request.user, product=product)
+                product_rating.rating = request.POST['rate']
+                product_rating.save()
 
         product_dict = dict()
         product_dict['count'] = pos_count

@@ -125,3 +125,14 @@ class Opinion(models.Model):
         User,
         on_delete=models.CASCADE,
     )
+
+class Rate(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    rate = models.IntegerField()

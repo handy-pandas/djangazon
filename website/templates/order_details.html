@@ -19,6 +19,16 @@
                 <p>| <strong>Description:</strong> {{product.description}} </p>
                 <p>| <strong>Quantity:</strong>: {{product.count}}</p>
                 <p>| <strong>Total:</strong> ${{product.price}} </p>
+                <form method="post" action="{% url 'website:order_details' order_id %}">
+                    {% csrf_token %}
+                    <input name="product_id" type="hidden" value="{{ product.id }}"/>
+                    <label>1<input name="rate" type="radio" value="1" {% if product.rate == 1 %} checked {% endif %}/></label>
+                    <label>2<input name="rate" type="radio" value="2"{% if product.rate == 2 %} checked {% endif %}/></label>
+                    <label>3<input name="rate" type="radio" value="3"{% if product.rate == 3 %} checked {% endif %}/></label>
+                    <label>4<input name="rate" type="radio" value="4"{% if product.rate == 4 %} checked {% endif %}/></label>
+                    <label>5<input name="rate" type="radio" value="5"{% if product.rate == 5 %} checked {% endif %}/></label>
+                    <input class="btn btn-success" type="submit" value="Rate!"/>
+                </form>
             </div>
             {% endfor %}
             <hr style="border-color: #000; border-width: 3px; width: 40%;">
