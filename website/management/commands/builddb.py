@@ -23,12 +23,15 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         management.call_command('makemigrations')
         management.call_command('migrate')
-        UserFactory.create_batch(size=5)
         CategoryFactory.create_batch(size=10)
+        ProfileFactory.create_batch(size=5)
         ProductFactory.create_batch(size=75)
         PaymentFactory.create_batch(size=5)
         OrderFactory.create_batch(size=5)
         InCompleteOrderFactory.create_batch(size=5)
         ProductOrderFactory.create_batch(size=175)
-        ProfileFactory.create_batch(size=5)
         OpinionFactory.create_batch(size=5)
+        # UserFactory.create_batch(size=5)
+        """ 
+        UserFactory is commented out due to the factory now being a one to one with the profile factory, profile factory calls upon the creation of the user through the profilefactory, line 175 in factories.py
+        """
