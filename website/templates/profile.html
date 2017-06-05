@@ -1,54 +1,64 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-  <head>
-      <title>Bangazon</title>
-      {%include "styles.html"%}
-  </head>
-
-  <body>
-      	{%include "navbar.html"%}
-      	<div class="container">
-      		<div class="row">
-      			<div class="text-right">
-      				<a class="btn btn-default" href="{% url 'website:profile/edit_account' %}">Edit account</a>
-      			</div>
-	      		<h2>Welcome To Your Profile Page</h2>
-            <h3><strong>{{user.first_name}} {{user.last_name}}</strong></h3>
-              <p>
-              Street: 
-                {% if profile.address %}
-                  {{profile.address}} 
-                {% endif %}
-              <p>
-              City: 
-                {% if profile.city %}
-                  {{profile.city}} 
-                {% endif %}
-              </p>
-              <p>
-              State: 
-                {% if profile.state %}
-                  {{profile.state}} 
-                {% endif %}
-              </p>
-              <p>
-              Zip Code: 
-                {% if profile.zipcode %}
-                  {{profile.zipcode}}
-                {% endif %}
-              </p>
-              <p>
-              Phone: 
-                {% if profile.phone_number %}
-                  {{profile.phone_number}}
-                {% endif %}
-              </p>
-              <p>Average Rating: {{ average_rating }}</p>
-              <p><a href="{% url 'website:profile/view_payments' %}">View payments</a></p>
-              <p><a href="{% url 'website:add_payment' %}">Add payment</a></p>
-              <p><a href="{% url 'website:order_history' %}">Order history</a></p>
-      		</div>
-      	</div>
-  </body>
+<head>
+	<title>Bangazon</title>
+	{%include "styles.html"%}
+</head>
+<body>
+	{%include "navbar.html"%}
+	<div class="container page-wrapper">
+		<div class="row text-center">
+			<div class="col-md-12">
+				<h1>Welcome To Your Profile Page</h1>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-sm-3">
+					<h2><strong>{{user.first_name}} {{user.last_name}}</strong></h2>
+					<h2 class="username">{{user.username}}</h2>
+					<a class="btn btn-default" href="{% url 'website:profile/edit_account' %}">Edit account</a>
+					<hr>
+					<p>
+						<strong>Street:</strong> 
+						{% if profile.address %}
+						{{profile.address}} 
+						{% endif %}
+					<p>
+						<strong>City:</strong>
+						{% if profile.city %}
+						{{profile.city}} 
+						{% endif %}
+					</p>
+					<p>
+						<strong>State:</strong>
+						{% if profile.state %}
+						{{profile.state}} 
+						{% endif %}
+					</p>
+					<p>
+						<strong>Zip Code:</strong> 
+						{% if profile.zipcode %}
+						{{profile.zipcode}}
+						{% endif %}
+					</p>
+					<p>
+						<strong>Phone:</strong> 
+						{% if profile.phone_number %}
+						{{profile.phone_number}}
+						{% endif %}
+					</p>
+				</div>
+				<div class="col-sm-6 text-center">
+					<h2><a href="{% url 'website:profile/view_payments' %}">View payments</a></h2>
+					<h2><a href="{% url 'website:add_payment' %}">Add payment</a></h2>
+					<h2><a href="{% url 'website:order_history' %}">Order history</a></h2>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

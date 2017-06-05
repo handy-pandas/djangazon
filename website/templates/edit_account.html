@@ -9,18 +9,34 @@
 <body>
 	{%include "navbar.html"%}
 	<div class="container">
-		<a href="{% url 'website:profile' %}">Back to profile</a>
-		<form class="form-inline" action="{% url 'website:profile/edit_account' %}" method="post">
-			{{ user_form.as_p }}
-			{{ profile_form.as_p }}
-			{% csrf_token %}
-			{% if message %}
-			{% for each in message %}
-				<div class="alert alert-danger">{{ each }}</div>
-			{% endfor %}
-			{% endif %}
-			<input class="btn btn-primary" type="submit" name="update" value="Update">
-		</form>
+		<div class="row">
+			<div class="col-sm-12 text-left">
+				<a href="{% url 'website:profile' %}">Back to profile</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<h2>Account settings</h2>
+				<hr>
+				<form class="form-group" action="{% url 'website:profile/edit_account' %}" method="post">
+					{{ user_form.as_p }}
+					{{ profile_form.as_p }}
+					{% csrf_token %}
+					{% if message %}
+					{% for each in message %}
+						<div class="alert alert-danger">{{ each }}</div>
+					{% endfor %}
+					{% endif %}
+					<input class="btn btn-primary btn-lg" type="submit" name="update" value="Update">
+				</form>
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+
+
+
+
 	</div>
 </body>
 </html>

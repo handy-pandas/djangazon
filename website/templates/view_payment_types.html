@@ -1,31 +1,44 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Bangazon</title>
-        {%include "styles.html"%}
-    </head>
-    <body>
-        {%include "navbar.html"%}
-        <a href="{% url 'website:profile' %}">Back to profile</a>
-        <h4>Your Payment Options.</h4>
-            <ul class="list-inline">
-                {% for payment in payments %}
-                <li class="list-inline-item">{{payment.name}}</li>
-
-                <form class="form-inline" action="{% url 'website:profile/view_payments' %}" method="post">
-                {% csrf_token %}
-
-                    <input class="form-control" name="delete_payment" type="hidden" value="{{ payment.id }}"/>
-                    <input class="form-control btn btn-danger" type="submit" value="Delete Payment"/>
-
-                </form>
-
-                {% endfor %}
-            </ul>
-            {% if not payments  %}
-            <a href="{% url 'website:add_payment' %}" class="btn btn-success">Create Payment</a>
-            {% endif %}
-    </body>
+<head>
+	<meta charset="utf-8">
+	<title>Bangazon</title>
+	{%include "styles.html"%}
+</head>
+<body>
+	{%include "navbar.html"%}
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-left">
+				<a href="{% url 'website:profile' %}">Back to profile</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<h1>Your Payment Options</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<hr>
+				<ul class="list-inline">
+					{% for payment in payments %}
+					<li class="list-inline-item"><h4>{{payment.name}}</h4></li>
+					<form class="form-inline" action="{% url 'website:profile/view_payments' %}" method="post">
+					{% csrf_token %}
+						<input class="form-control" name="delete_payment" type="hidden" value="{{ payment.id }}"/>
+						<input class="form-control btn btn-danger" type="submit" value="Delete Payment"/>
+					</form>
+					{% endfor %}
+				</ul>
+				{% if not payments  %}
+				<a href="{% url 'website:add_payment' %}" class="btn btn-success">Create Payment</a>
+				{% endif %}
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+	</div>
+</body>
 </html>
