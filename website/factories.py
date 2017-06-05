@@ -167,11 +167,11 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     """
     class Meta:
         model = Profile
-    phone_number = factory.Faker('phone_number')
+    phone_number = 6158675309
     address = factory.Faker('address')
     city = factory.Faker('city')
     state = factory.Faker('state_abbr')
-    zipcode = factory.Faker('postalcode')
+    zipcode = 37214
     user = factory.Iterator(User.objects.all())
 
 
