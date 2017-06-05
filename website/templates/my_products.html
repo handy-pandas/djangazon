@@ -1,30 +1,46 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Bangazon</title>
-    {%include "styles.html"%}
-  </head>
-  <body>
-    {%include "navbar.html"%}
-    <h1>My Products</h1><br>
-    {% if products%}
-    {% for product in products %}
-    <ul>
-        <li id="{{product.id}}">Title: <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
-        <li>Price: ${{ product.price }}</li>
-        <li>Units Sold: {{ product.sold_count }}</li>
-        <li>Quantity Remaining: {{ product.quantity }}</li>
-        <form id="login_form" method="post" action="{% url 'website:my_products' %}">
-            {% csrf_token %}
-            <input name="product_id" type="hidden" value="{{ product.id }}"/>
-            <input class="btn btn-danger" type="submit" value="Delete Product"/>
-        </form>
-    </ul><br>
-    {% endfor %}
-    {% else %}
-    <a href="{% url 'website:sell' %}" class="btn btn-warning">Sell a Product</a>
-    {% endif %}
-  </body>
+<head>
+	<meta charset="utf-8">
+	<title>Bangazon</title>
+	{%include "styles.html"%}
+</head>
+<body>
+	{%include "navbar.html"%}
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<h1>My Products</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<hr>
+				{% if products%}
+				{% for product in products %}
+					<ul>
+						<li id="{{product.id}}">Title: <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
+						<li>Price: ${{ product.price }}</li>
+						<li>Units Sold: {{ product.sold_count }}</li>
+						<li>Quantity Remaining: {{ product.quantity }}</li>
+						<form id="login_form" method="post" action="{% url 'website:my_products' %}">
+							{% csrf_token %}
+							<input name="product_id" type="hidden" value="{{ product.id }}"/>
+							<input class="btn btn-danger" type="submit" value="Delete Product"/>
+						</form>
+					</ul><br>
+				{% endfor %}
+
+				{% else %}
+				<div class="text-center">
+					<a href="{% url 'website:sell' %}" class="btn btn-warning btn-lg text-center">Sell a Product</a>
+					{% endif %}
+				</div>
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+	</div>
+</body>
 </html>

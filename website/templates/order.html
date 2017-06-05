@@ -1,68 +1,66 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Bangazon</title>
+<head>
+	<meta charset="utf-8">
+	<title>Bangazon</title>
+	{%include "styles.html"%}
+</head>
+<body>
+	{%include "navbar.html"%}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h1>Order Preview</h1>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6 order-preview-products">
+				{% if order.products.all  %}
+				<ol>
+					{% for product in product_list %}
+						<li>
+						<p>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></p>
+						<p>Quantity: {{ product.count }}</p>
+						<p>Price: ${{ product.price }}</p>
+						</li>
+						<form action="{% url 'website:order' %}" method="post">
+							{% csrf_token %}
+							<input name="delete_product" type="hidden" value="{{ product.id }}"/>
+							<input class="btn btn-danger btn-sm" type="submit" value="Delete Product"/>
+						</form>
+					{% endfor %}
 
-        {%include "styles.html"%}
-    </head>
-    <body>
-
-        {%include "navbar.html"%}
-
-        <h2>Order Preview</h2>
-
-            {% if order.products.all  %}
-
-        <ol>
-            {% for product in product_list %}
-            <li>
-                <p>Product Name:  <a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></p>
-                <p>Quantity: {{ product.count }}</p>
-                <p>Price: ${{ product.price }}</p>
-            </li>
-
-        <form action="{% url 'website:order' %}" method="post">
-
-        {% csrf_token %}
-
-            <input name="delete_product" type="hidden" value="{{ product.id }}"/>
-            <input class="btn btn-danger btn-sm" type="submit" value="Delete Product"/>
-
-        </form>
-
-            {% endfor %}
-
-        </ol>
-        <p><strong>Order Total: ${{ total }} </strong></p>
-            {% endif %}
-
-        <form action="{% url 'website:payment' %}" method="post">
-
-        {% csrf_token %}
-
-            <input name="order_id" type="hidden" value="{{ order_id }}"/>
-            <input name="payment_id" type="hidden" value="Needed"/>
-
-            {% if not order.products.all  %}
-
-            <a href="{% url 'website:index' %}" class="btn btn-success">Please Add Products</a>
-
-            {% else %}
-
-            <input class="btn btn-success" type="submit" value="Continue to Choose Payment Type"/>
-
-        </form>
-        <form action="{% url 'website:order' %}" method="post">
-
-        {% csrf_token %}
-
-            <input name="cancel_payment" type="hidden" value="True"/>
-            <input class="btn btn-danger" type="submit" value="Cancel Order"/>
-        </form>
-            {% endif %}
-
-
-    </body>
+				</ol>
+				<hr>
+				<h3><strong>Order Total: ${{ total }} </strong></h3>
+				{% endif %}
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 text-right">
+				<form action="{% url 'website:payment' %}" method="post">
+					{% csrf_token %}
+					<input name="order_id" type="hidden" value="{{ order_id }}"/>
+					<input name="payment_id" type="hidden" value="Needed"/>
+					{% if not order.products.all  %}
+					<a href="{% url 'website:index' %}" class="btn btn-success">Please Add Products</a>
+					{% else %}
+					<input class="btn btn-success" type="submit" value="Continue to Choose Payment Type"/>
+				</form>
+			</div>
+			<div class="col-sm-6 text-left">
+				<form action="{% url 'website:order' %}" method="post">
+					{% csrf_token %}
+					<input name="cancel_payment" type="hidden" value="True"/>
+					<input class="btn btn-danger" type="submit" value="Cancel Order"/>
+				</form>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</body>
 </html>

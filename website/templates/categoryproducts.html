@@ -1,24 +1,30 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Bangazon</title>
-    {%include "styles.html"%}
-  </head>
-  <body>
-    {%include "navbar.html"%}
-    <div class='container'>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active">{{name}} /</li>
-      </ol>
-      <ol>
-      {% for product in products %}
-        <li>
-          <a href="{% url 'website:product_details' product.id %}">{{ product.title }}, {{product.quantity}}, ${{product.price}} </a>
-        </li>
-      {% endfor %}
-      </ol>
-    </div>
-  </body>
+<head>
+	<meta charset="utf-8">
+	<title>Bangazon</title>
+	{%include "styles.html"%}
+</head>
+<body>
+	{%include "navbar.html"%}
+	<div class='container'>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active">{{name}} /</li>
+		</ol>
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="text-center">All products in {{name}}</h1>
+				<hr>
+				<ol>
+				{% for product in products %}
+					<li>
+					<a href="{% url 'website:product_details' product.id %}">{{ product.title }}, {{product.quantity}}, ${{product.price}} </a>
+					</li>
+				{% endfor %}
+				</ol>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
