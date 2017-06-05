@@ -1,4 +1,5 @@
 from django.contrib.auth.models import *
+from django.db.models import Avg
 from django.db import models
 
 # Create your models here.
@@ -78,6 +79,20 @@ class Product(models.Model):
     def get_count_on_order(self, order_id):
         return ProductOrder.objects.filter(product=self, order=order_id).count()
 
+    def get_rating_for_customer(self, user):
+        try:
+            rating = Rate.objects.get(user=user, product=self)
+            return rating.rate
+        except Rate.DoesNotExist:
+            return False
+
+    def get_average_rating(self):
+        avg_rating = Rate.objects.filter(product=self).aggregate(Avg('rate'))
+        if avg_rating['rate__avg'] != None:                
+            return str(round(avg_rating['rate__avg'], 2))
+        else:
+            return 'Product has not been rated yet.'
+
     def __str__(self):
         return self.title
 
@@ -135,4 +150,4 @@ class Rate(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    rate = models.IntegerField()
+    rate = models.IntegerField(null=True, blank=True)
