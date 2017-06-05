@@ -20,3 +20,4 @@ from website.views.edit_account_view import *
 from website.views.view_search_products import *
 from website.views.view_order_history import *
 from website.views.view_order_details import *
+from website.views.view_recommend_product import *

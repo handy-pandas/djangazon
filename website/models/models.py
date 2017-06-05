@@ -114,6 +114,17 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
     )
 
+class RecommendProduct(models.Model):
+    
+    receiver = models.ForeignKey(
+        User,
+        on_delete = models.CASCADE,
+        )
+    product = models.ForeignKey(
+        Product,
+        on_delete = models.CASCADE,
+        )
+
 
 class Opinion(models.Model):
     like = models.IntegerField(default=0, choices=options)

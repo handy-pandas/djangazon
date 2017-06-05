@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bangazon</title>
+    {%include "styles.html"%}
+  </head>
+  {%include "navbar.html"%}
+  <body>
+
+    <h1>Recommend To A Friend</h1>
+    <form action="{% url 'website:recommend_product' product.id %}" method="post">
+    <h3>Enter your Friend's username</h3>
+      {% csrf_token %}
+    {{recommendation_form.as_p}}
+    <input name="receiver" type="text" value="{{RecommendProduct.receiver}}"/>
+            <input class="btn btn-danger btn-sm" type="submit" value="Send Notification"/>
+
+    </form>
+  </body>
+</html>
+

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from website.forms.forms import UserForm
 from website.forms.form_product import ProductForm
-from website.models.models import Product, Category, Order, ProductOrder, Opinion
+from website.models.models import Product, Category, Order, ProductOrder, Opinion, RecommendProduct
 
 
 def product_details(request, product_id):
@@ -77,7 +77,7 @@ def product_details(request, product_id):
 			po.save()
 
 
-
+	
 
 	elif request.method == 'GET':
 		chosen_product = Product.objects.get(pk=product_id)
