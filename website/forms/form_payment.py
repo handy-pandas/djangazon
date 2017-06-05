@@ -6,4 +6,8 @@ class PaymentForm(forms.ModelForm):
 
     class Meta:
         model = Payment
+        widgets = {
+                    'name': forms.TextInput(attrs={'class': 'form-control'}),
+                    'account_number': forms.NumberInput(attrs={'class': 'form-control'})
+                }
         fields = ('name', 'account_number')

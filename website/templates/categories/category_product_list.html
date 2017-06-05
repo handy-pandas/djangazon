@@ -1,24 +1,36 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Bangazon</title>
-    {%include "styles.html"%}
-  </head>
-  <body>
-    {%include "navbar.html"%}
-    <h1>Products By Category</h1>
+<head>
+	<meta charset="utf-8">
+	<title>Bangazon</title>
+	{%include "styles.html"%}
+</head>
+<body>
+	{%include "navbar.html"%}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h1>Products By Category</h1>
+			</div>
+		</div>
+		<hr>
+		<div class="col-md-12">
+			{% for category in categories %}
+				<p><a href="{% url 'website:category_products' category.id %}">{{ category.name }}</a> ({{ category.products.count }})</p>
+				<ol>
+				{% for product in category.get_products %}
+					<li><a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
+				{% endfor %}
+				</ol>
+			{% endfor %}
+		</div>
+	</div>
 
-    {% for category in categories %}
-      <p><a href="{% url 'website:category_products' category.id %}">{{ category.name }}</a>  ({{ category.products.count }})</p>
-      <ol>
-      {% for product in category.get_products %}
-        <li><a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
 
-      {% endfor %}
 
-      </ol>
-    {% endfor %}
-  </body>
+	
+
+	
+</body>
 </html>
