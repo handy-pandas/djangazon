@@ -5,24 +5,60 @@
 	<title>Bangazon</title>
 	{%include "styles.html"%}
 </head>
-
 <body>
 	{%include "navbar.html"%}
-	<div class="container-fluid page-wrapper">
-		<div class="col-md-12 text-center">
-			<div class="row profile-content">
-				<img src="../../media/images/Mariota.jpg">
-				<h1>{{user.first_name}} {{user.last_name}}</h1>
-				<h2>{{user.username}}</h2>
-				<hr>
-				<p>{{profile.address}} {{profile.city}}, {{profile.state}} {{profile.zipcode}}</p>
-				<p><a href="#">{{profile.phone_number}}</a></p>
-				<p><a href="{% url 'website:profile/view_payments' %}">View payments</a></p>
-				<p><a href="{% url 'website:add_payment' %}">Add payment</a></p>
-				<p><a href="{% url 'website:order_history' %}">Order history</a></p>
-				<hr>
-				<a class="btn btn-default edit-button" href="{% url 'website:profile/edit_account' %}">Edit account</a>	
-			</div>			
+	<div class="container page-wrapper">
+		<div class="row text-center">
+			<div class="col-md-12">
+				<h1>Welcome To Your Profile Page</h1>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-sm-3">
+					<h2><strong>{{user.first_name}} {{user.last_name}}</strong></h2>
+					<h2 class="username">{{user.username}}</h2>
+					<a class="btn btn-default" href="{% url 'website:profile/edit_account' %}">Edit account</a>
+					<hr>
+					<p>
+						<strong>Street:</strong> 
+						{% if profile.address %}
+						{{profile.address}} 
+						{% endif %}
+					<p>
+						<strong>City:</strong>
+						{% if profile.city %}
+						{{profile.city}} 
+						{% endif %}
+					</p>
+					<p>
+						<strong>State:</strong>
+						{% if profile.state %}
+						{{profile.state}} 
+						{% endif %}
+					</p>
+					<p>
+						<strong>Zip Code:</strong> 
+						{% if profile.zipcode %}
+						{{profile.zipcode}}
+						{% endif %}
+					</p>
+					<p>
+						<strong>Phone:</strong> 
+						{% if profile.phone_number %}
+						{{profile.phone_number}}
+						{% endif %}
+					</p>
+				</div>
+				<div class="col-sm-6 text-center">
+					<h3>Options</h3>
+					<p><a href="{% url 'website:profile/view_payments' %}">View payments</a></p>
+					<p><a href="{% url 'website:add_payment' %}">Add payment</a></p>
+					<p><a href="{% url 'website:order_history' %}">Order history</a></p>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
 		</div>
 	</div>
 </body>

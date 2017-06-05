@@ -4,7 +4,7 @@ from website.views.view_category_products import *
 from django.urls import reverse
 
 # Test 1
-# Verify that when a specific product category view (e.g. Electronics) 
+# Verify that when a specific product category view (e.g. Electronics)
 # is requested,
  # that there are products in the response context
 class CategoryViewTests(TestCase):
@@ -64,6 +64,22 @@ class ProductArttributeTests(TestCase):
 		self.assertContains(
 			response, product.quantity
 		)
+# Verify that the Order History view for a customer has all of the orders in the request context
+# Test 5
+class OrderHistory(TestCase):
+    def test_order_history_has_all_orders_for_a_customer(self):
+        c = Client()
+        customer = User.objects.create(username="test_user_1")
+
+        order = Order.objects.create(user=customer, payment_id=1)
+        order2 = Order.objects.create(user=customer, payment_id=1)
+        order3 = Order.objects.create(user=customer, payment_id=1)
+        logged_in = c.force_login(customer, backend=None)
+        response = c.get(reverse('website:order_history'))
+        self.assertContains(response, order.id)
+        self.assertContains(response, order2.id)
+        self.assertContains(response, order3.id)
+
 
 # Verify that the Payment Types view for a customer has all of the payment types in the request context
 # Test 6

@@ -2,14 +2,14 @@
   font-size: 3em; }
 
 .custom-navbar-container {
-  background-color: #009999; }
+  background-color: #00284d; }
   .custom-navbar-container .nav li:hover {
     background-color: #fff; }
     .custom-navbar-container .nav li:hover a {
-      color: #009999; }
+      color: #00284d; }
   .custom-navbar-container .nav li:active a,
   .custom-navbar-container .nav li:focus a {
-    color: #009999; }
+    color: #00284d; }
   .custom-navbar-container .nav li a {
     color: #fff; }
   .custom-navbar-container .nav .number-of-items-in-cart {
@@ -17,10 +17,9 @@
 
 .card-container {
   border: 2px solid #999;
-  border-radius: 5px;
   margin: 1em 0; }
   .card-container .card-image img {
-    height: 25em;
+    height: 20em;
     width: 100%; }
   .card-container .content-holder .button-on-card {
     margin: 1em 0; }
@@ -30,21 +29,18 @@
   -moz-box-shadow: 0px 3px 19px -2px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 3px 19px -2px rgba(0, 0, 0, 0.75); }
 
-.page-wrapper hr {
-  width: 40%; }
-.page-wrapper .profile-content img {
-  height: 25em;
-  width: 40%;
-  border-radius: 5px; }
-.page-wrapper .profile-content h1 {
-  margin: 1em 0 0 0; }
-.page-wrapper .profile-content h2 {
-  margin: 0.25em 0;
+.page-wrapper .username {
   color: #999;
-  font-weight: 300; }
-.page-wrapper .profile-content p {
-  font-size: 2rem; }
-.page-wrapper .profile-content .edit-button {
-  margin-bottom: 1.5em; }
+  margin: 0 0 0.5em 0;
+  font-weight: normal; }
+.page-wrapper h3 {
+  text-decoration: underline; }
+
+.order-details-wrapper h1 {
+  text-decoration: underline; }
+.order-details-wrapper hr {
+  border-color: #000;
+  border-width: 3px;
+  width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

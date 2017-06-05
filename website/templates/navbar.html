@@ -10,12 +10,16 @@
         <input value="{{request.GET.search}}" type="text" class="form-control" name="Search" placeholder="Search">   <!--.search above can be anything you want -->
       </div>
 
-      Local<input type="checkbox" value="True" name="local_delivery">
-      <input class="btn btn-primary btn-sm invisible" type="submit" value="Search">
+      <span style="color: #fff;">Local
+        <input type="checkbox" value="True" name="local_delivery">
+        <input class="btn btn-primary btn-sm invisible" type="submit" value="Search">
+      </span>
 
     </form>
     <ul class="nav navbar-nav navbar-right">
+        {% if user.get_cart_items != 0 %}
         <li class="number-of-items-in-cart">{{ user.get_cart_items }}</li>
+        {% endif %}
         <li class="">
             {% if user.is_authenticated %}
             <a href="/order">

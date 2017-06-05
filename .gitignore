@@ -9,5 +9,5 @@ obj
 .DS_STORE
 /website/migrations
 /media
-/website/styling
+/website/styling/lib
 /website/static/style.css.map
