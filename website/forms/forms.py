@@ -4,10 +4,16 @@ from website.models.validators.profile_validators import validate_phone, validat
 from django import forms
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
+        widgets = {
+                    'username': forms.TextInput(attrs={'class': 'form-control'}),
+                    'email': forms.TextInput(attrs={'class': 'form-control'}),
+                    'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+                    'last_name': forms.TextInput(attrs={'class': 'form-control'})
+                }
         fields = ('username', 'email', 'password', 'first_name', 'last_name')
 
 class EditUserForm(forms.ModelForm):
