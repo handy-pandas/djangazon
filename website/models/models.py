@@ -113,7 +113,6 @@ class ProductOrder(models.Model):
 
 def get_cart_items(self):
     order = Order.objects.get(user=self, payment=None)
-    print(order.get_product_count())
     return order.get_product_count()
 
 User.add_to_class('get_cart_items', get_cart_items)
@@ -171,7 +170,6 @@ class Recommendation(models.Model):
 
 def get_recommendations_notifications(self):
     notifications = Recommendation.objects.filter(receiver=self)
-    print(notifications)
     return notifications.count()
 
 User.add_to_class('get_recommendations_notifications', get_recommendations_notifications)
