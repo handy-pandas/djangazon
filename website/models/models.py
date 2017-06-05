@@ -125,3 +125,19 @@ class Opinion(models.Model):
         User,
         on_delete=models.CASCADE,
     )
+
+class Recommendation(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+    receiver = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+def get_recommendations_notifications(self):
+    notifications = Recommendation.objects.filter(receiver=self)
+    return notifications.count()
+
+User.add_to_class('get_recommendations_notifications', get_recommendations_notifications)

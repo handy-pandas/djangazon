@@ -32,3 +32,4 @@ class Command(BaseCommand):
         ProductOrderFactory.create_batch(size=175)
         ProfileFactory.create_batch(size=5)
         OpinionFactory.create_batch(size=5)
+        RecommendationFactory.create_batch(size=5)

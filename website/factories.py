@@ -191,3 +191,18 @@ class OpinionFactory(factory.django.DjangoModelFactory):
     like = 1
     product = factory.Iterator(Product.objects.all())
     user = factory.Iterator(User.objects.all())
+
+class RecommendationFactory(factory.django.DjangoModelFactory):
+    """
+    This class creates data for the recommendation table in the database.
+
+    ----Fields----
+    product(Iterator[Product]): iterates over product.objects.all
+    receiver(Iterator[user]): iterates over user.objects.all
+
+    Author: wocaldwell
+    """
+    class Meta:
+        model = Recommendation
+    product = factory.Iterator(Product.objects.all())
+    receiver = factory.Iterator(User.objects.all())
