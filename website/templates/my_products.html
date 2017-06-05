@@ -16,6 +16,7 @@
         <li>Price: ${{ product.price }}</li>
         <li>Units Sold: {{ product.sold_count }}</li>
         <li>Quantity Remaining: {{ product.quantity }}</li>
+        <li>Average Rating: {{ product.get_average_rating }}</li>
         <form id="login_form" method="post" action="{% url 'website:my_products' %}">
             {% csrf_token %}
             <input name="product_id" type="hidden" value="{{ product.id }}"/>

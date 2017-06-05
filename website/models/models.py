@@ -1,4 +1,5 @@
 from django.contrib.auth.models import *
+from django.db.models import Avg
 from django.db import models
 
 # Create your models here.
@@ -78,6 +79,20 @@ class Product(models.Model):
     def get_count_on_order(self, order_id):
         return ProductOrder.objects.filter(product=self, order=order_id).count()
 
+    def get_rating_for_customer(self, user, order):
+        try:
+            rating = Rate.objects.get(user=user, product=self, order=order)
+            return rating.rate
+        except Rate.DoesNotExist:
+            return False
+
+    def get_average_rating(self):
+        avg_rating = Rate.objects.filter(product=self).aggregate(Avg('rate'))
+        if avg_rating['rate__avg'] != None:
+            return str(round(avg_rating['rate__avg'], 2))
+        else:
+            return 'Product has not been rated yet.'
+
     def __str__(self):
         return self.title
 
@@ -115,6 +130,12 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def get_average_rating(self, user):
+        avg_rating = Rate.objects.select_related("product").filter(product__seller=user).aggregate(Avg('rate'))
+        if avg_rating['rate__avg'] != None:
+            return str(round(avg_rating['rate__avg'], 2))
+        else:
+            return 'Your products do not have any ratings.'
 
 class Opinion(models.Model):
     like = models.IntegerField(default=0, choices=options)
@@ -126,6 +147,17 @@ class Opinion(models.Model):
         User,
         on_delete=models.CASCADE,
     )
+
+class Rate(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+    )
+    rate = models.IntegerField(null=True, blank=True)
 
 class Recommendation(models.Model):
     product = models.ForeignKey(
@@ -143,3 +175,4 @@ def get_recommendations_notifications(self):
     return notifications.count()
 
 User.add_to_class('get_recommendations_notifications', get_recommendations_notifications)
+

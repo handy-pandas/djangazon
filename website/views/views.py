@@ -120,7 +120,8 @@ def profile(request):
     """
     user = request.user
     user_profile = Profile.objects.get(pk=user.id)
-    context = { 'profile': user_profile }
+    average_rating = user_profile.get_average_rating(user)
+    context = { 'profile': user_profile, 'average_rating': average_rating }
     template_name = 'profile.html'
     return render(request, template_name, context)
 

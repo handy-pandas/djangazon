@@ -172,7 +172,7 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     city = factory.Faker('city')
     state = factory.Faker('state_abbr')
     zipcode = 37214
-    user = factory.Iterator(User.objects.all())
+    user = factory.SubFactory('website.factories.UserFactory')
 
 
 class OpinionFactory(factory.django.DjangoModelFactory):

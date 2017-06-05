@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from website.models.models import Order, Product, ProductOrder
+from website.models.models import Order, Product, ProductOrder, Rate
 
 def view_order_details(request, order_id):
     """This function will allow the user to view each individual order's details
@@ -17,7 +17,6 @@ def view_order_details(request, order_id):
         Nick Nash
         Adam Myers
     """
-
     # Grabbing all necessary information
     order = Order.objects.get(id=order_id)
 
@@ -29,12 +28,30 @@ def view_order_details(request, order_id):
         pos = ProductOrder.objects.filter(product=product, order=order)
         pos_count = pos.count()
 
-        product_dict = dict()
-        product_dict['count'] = pos_count
-        product_dict['title'] = product.title
-        product_dict['price'] = product.price
-        product_dict['description'] = product.description
-        product_dict['id'] = product.id
+        if request.method == 'POST':
+            if str(product.id) == request.POST['product_id']:
+                try:
+                    product_rating = Rate.objects.get(user=request.user, product=product, order=order)
+                    product_rating.rate = request.POST['rate']
+                except Rate.DoesNotExist:
+                    product_rating = Rate(
+                        user=request.user,
+                        product=product,
+                        order=order,
+                        rate=request.POST['rate']
+                        )
+                product_rating.save()
+
+        product_dict = { 
+            'count': pos_count,
+            'title': product.title,
+            'price': product.price,
+            'description': product.description,
+            'id': product.id
+            }
+        if product.get_rating_for_customer(request.user, order):
+            product_dict['rating'] = product.get_rating_for_customer(request.user, order)
+
         product_list.append(product_dict)
         total = total + product.price
 
