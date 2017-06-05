@@ -79,9 +79,9 @@ class Product(models.Model):
     def get_count_on_order(self, order_id):
         return ProductOrder.objects.filter(product=self, order=order_id).count()
 
-    def get_rating_for_customer(self, user):
+    def get_rating_for_customer(self, user, order):
         try:
-            rating = Rate.objects.get(user=user, product=self)
+            rating = Rate.objects.get(user=user, product=self, order=order)
             return rating.rate
         except Rate.DoesNotExist:
             return False
@@ -129,6 +129,12 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def get_average_rating(self, user):
+        avg_rating = Rate.objects.select_related("product").filter(product__seller=user).aggregate(Avg('rate'))
+        if avg_rating['rate__avg'] != None:                
+            return str(round(avg_rating['rate__avg'], 2))
+        else:
+            return 'Your products do not have any ratings.'
 
 class Opinion(models.Model):
     like = models.IntegerField(default=0, choices=options)
@@ -148,6 +154,10 @@ class Rate(models.Model):
     )
     user = models.ForeignKey(
         User,
+        on_delete=models.CASCADE,
+    )
+    order = models.ForeignKey(
+        Order,
         on_delete=models.CASCADE,
     )
     rate = models.IntegerField(null=True, blank=True)

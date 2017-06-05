@@ -31,12 +31,13 @@ def view_order_details(request, order_id):
         if request.method == 'POST':
             if str(product.id) == request.POST['product_id']:
                 try:
-                    product_rating = Rate.objects.get(user=request.user, product=product)
+                    product_rating = Rate.objects.get(user=request.user, product=product, order=order)
                     product_rating.rate = request.POST['rate']
                 except Rate.DoesNotExist:
                     product_rating = Rate(
                         user=request.user,
                         product=product,
+                        order=order,
                         rate=request.POST['rate']
                         )
                 product_rating.save()
@@ -48,8 +49,8 @@ def view_order_details(request, order_id):
             'description': product.description,
             'id': product.id
             }
-        if product.get_rating_for_customer(request.user):
-            product_dict['rating'] = product.get_rating_for_customer(request.user)
+        if product.get_rating_for_customer(request.user, order):
+            product_dict['rating'] = product.get_rating_for_customer(request.user, order)
 
         product_list.append(product_dict)
         total = total + product.price
