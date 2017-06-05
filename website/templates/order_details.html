@@ -17,7 +17,7 @@
             <br><div>
                 <p><strong>Product:</strong> {{product.title}} </p>
                 <p>| <strong>Description:</strong> {{product.description}} </p>
-                <p>| <strong>Quantity:</strong>: {{product.count}}</p>
+                <p>| <strong>Quantity:</strong> {{product.count}}</p>
                 <p>| <strong>Total:</strong> ${{product.price}} </p>
                 <form method="post" action="{% url 'website:order_details' order_id %}">
                     {% csrf_token %}
