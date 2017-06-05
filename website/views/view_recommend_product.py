@@ -9,7 +9,20 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def recommend_product(request, product_id):
 	"""
-	this method does stuff for recommending products
+	Product is recommended and added to the recommendation table.
+
+	Author:
+	    Angela Lee
+	    wocaldwell
+
+	Args:
+	    request (List): A list of tuples from the database
+	    product_id (int): the chosen product id
+
+	Returns:
+	    request: A list of tuples from the database
+	    template_name (HTML): The webpage's structure
+	    product (Dict): This is the product's information stored inside of a dictionary
 	"""
 
 	if request.method == 'POST':
