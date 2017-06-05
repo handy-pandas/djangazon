@@ -136,6 +136,7 @@ class Profile(models.Model):
         else:
             return 'Your products do not have any ratings.'
 
+
 class Opinion(models.Model):
     like = models.IntegerField(default=0, choices=options)
     product = models.ForeignKey(
