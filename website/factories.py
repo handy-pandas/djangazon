@@ -19,7 +19,7 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Category
-    name = factory.Faker('bs')
+    name = factory.Faker('catch_phrase')
 
 class UserFactory(factory.django.DjangoModelFactory):
     """
@@ -123,7 +123,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
     seller = factory.Iterator(User.objects.all())
-    title = factory.Faker('word')
+    title = factory.Faker('domain_name')
     description = factory.Faker('bs')
     price = factory.Faker('random_int', min=1, max=100)
     quantity = factory.Faker('random_int', min=10, max=50)
@@ -191,3 +191,18 @@ class OpinionFactory(factory.django.DjangoModelFactory):
     like = 1
     product = factory.Iterator(Product.objects.all())
     user = factory.Iterator(User.objects.all())
+
+class RecommendationFactory(factory.django.DjangoModelFactory):
+    """
+    This class creates data for the recommendation table in the database.
+
+    ----Fields----
+    product(Iterator[Product]): iterates over product.objects.all
+    receiver(Iterator[user]): iterates over user.objects.all
+
+    Author: wocaldwell
+    """
+    class Meta:
+        model = Recommendation
+    product = factory.Iterator(Product.objects.all())
+    receiver = factory.Iterator(User.objects.all())

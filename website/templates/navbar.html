@@ -44,6 +44,12 @@
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             </a>
         </li>
+        <li class="number-of-items-in-cart">{{ user.get_recommendations_notifications }}</li>
+        <li class="">
+            <a href="/notifications">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+            </a>
+        </li>
         <li class="">
             <a href="{% url 'website:logout' %}">Logout</a>
         </li>

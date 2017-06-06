@@ -88,7 +88,7 @@ class Product(models.Model):
 
     def get_average_rating(self):
         avg_rating = Rate.objects.filter(product=self).aggregate(Avg('rate'))
-        if avg_rating['rate__avg'] != None:                
+        if avg_rating['rate__avg'] != None:
             return str(round(avg_rating['rate__avg'], 2))
         else:
             return 'Product has not been rated yet.'
@@ -131,10 +131,11 @@ class Profile(models.Model):
 
     def get_average_rating(self, user):
         avg_rating = Rate.objects.select_related("product").filter(product__seller=user).aggregate(Avg('rate'))
-        if avg_rating['rate__avg'] != None:                
+        if avg_rating['rate__avg'] != None:
             return str(round(avg_rating['rate__avg'], 2))
         else:
             return 'Your products do not have any ratings.'
+
 
 class Opinion(models.Model):
     like = models.IntegerField(default=0, choices=options)
@@ -161,3 +162,20 @@ class Rate(models.Model):
         on_delete=models.CASCADE,
     )
     rate = models.IntegerField(null=True, blank=True)
+
+class Recommendation(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+    receiver = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+def get_recommendations_notifications(self):
+    notifications = Recommendation.objects.filter(receiver=self)
+    return notifications.count()
+
+User.add_to_class('get_recommendations_notifications', get_recommendations_notifications)
+

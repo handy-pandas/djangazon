@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from website.forms.forms import UserForm
 from website.forms.form_product import ProductForm
-from website.models.models import Product, Category, Order, ProductOrder, Opinion
+from website.models.models import Product, Category, Order, ProductOrder, Opinion, Recommendation
 
 
 def product_details(request, product_id):

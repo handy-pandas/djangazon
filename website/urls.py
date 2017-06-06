@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^order_history$', view_order_history, name="order_history"),
     url(r'^order_history/(?P<order_id>.+?)/$', view_order_details, name="order_details"),
     url(r'^MyProducts$', my_products, name='my_products'),
-    url(r'^profile/edit_account$', edit_account, name="profile/edit_account")
+    url(r'^profile/edit_account$', edit_account, name="profile/edit_account"),    
+    url(r'^recommend_product/(?P<product_id>.+?)/$', recommend_product, name='recommend_product')
 ]
