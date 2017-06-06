@@ -84,6 +84,9 @@ No additional resources required.
 * [Python](http://www.dropwizard.io/1.0.2/docs/) - Main Language
 * [Django](http://www.dropwizard.io/1.0.2/docs/) - The framework used
 * [pip](https://maven.apache.org/) - Dependency Management
+* [pip](https://maven.apache.org/) - Dependency Management
+* [grunt](https://gruntjs.com/) - Javascript Task Runner
+* [sass](http://sass-lang.com/) - Styling
 
 
 ## Authors
