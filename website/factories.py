@@ -19,7 +19,7 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Category
-    name = factory.Faker('bs')
+    name = factory.Faker('catch_phrase')
 
 class UserFactory(factory.django.DjangoModelFactory):
     """
@@ -123,7 +123,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
     seller = factory.Iterator(User.objects.all())
-    title = factory.Faker('word')
+    title = factory.Faker('domain_name')
     description = factory.Faker('bs')
     price = factory.Faker('random_int', min=1, max=100)
     quantity = factory.Faker('random_int', min=10, max=50)
@@ -172,7 +172,7 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     city = factory.Faker('city')
     state = factory.Faker('state_abbr')
     zipcode = 37214
-    user = factory.SubFactory('website.factories.UserFactory')
+    user = factory.SubFactory(UserFactory)
 
 
 class OpinionFactory(factory.django.DjangoModelFactory):
