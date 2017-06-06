@@ -46,14 +46,14 @@
 				{% if user.is_authenticated %}
 					<form action="{% url 'website:product_details' product.id %}" method="post">
 						{% csrf_token %}
-						<input name="like" type="hidden" value="{{ product.id }}"/>
+						<input name="opinion" type="hidden" value="like"/>
 						<input class="btn btn-success" type="submit" value="Like">
 					</form>
 				</div>
 				<div class="col-xs-6 text-left">
 					<form action="{% url 'website:product_details' product.id %}" method="post">
 						{% csrf_token %}
-						<input name="dislike" type="hidden" value="{{ product.id }}"/>
+						<input name="opinion" type="hidden" value="dislike"/>
 						<input class="btn btn-danger" type="submit" value="Dislike">
 					</form>
 				</div>
